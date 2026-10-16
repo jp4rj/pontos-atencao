@@ -1,26 +1,28 @@
 // ===== ESTADO =====
 let indiceAtual = 0;
-const cards = document.querySelectorAll('.card');
-const totalCards = cards.length;
+const todosCards = document.querySelectorAll('.card:not(.card-final)');
+const cardFinal = document.getElementById('cardFinal');
+const totalCards = todosCards.length;
 const visitados = new Set();
-let swipeStartX = 0;
-let swipeStartY = 0;
-let swipeAtivo = false;
+let finalMostrado = false;
 
 // ===== INICIALIZAÇÃO =====
 function init() {
   criarIndicador();
   mostrarCard(0);
-  configurarSwipe();
   configurarTeclado();
+  atualizarProgresso();
 }
 
 // ===== MOSTRAR CARD =====
 function mostrarCard(novoIndice) {
   if (novoIndice < 0 || novoIndice >= totalCards) return;
 
+  finalMostrado = false;
+  cardFinal.classList.remove('ativo');
+
   // Pausa vídeo do card que está saindo
-  const cardSaindo = cards[indiceAtual];
+  const cardSaindo = todosCards[indiceAtual];
   const videoSaindo = cardSaindo.querySelector('video');
   if (videoSaindo) {
     videoSaindo.pause();
@@ -28,66 +30,103 @@ function mostrarCard(novoIndice) {
   }
 
   // Remove classe ativo de todos
-  cards.forEach(c => c.classList.remove('ativo'));
+  todosCards.forEach(c => c.classList.remove('ativo'));
 
   // Ativa o novo
   indiceAtual = novoIndice;
-  const cardNovo = cards[indiceAtual];
+  const cardNovo = todosCards[indiceAtual];
   cardNovo.classList.add('ativo');
-
-  // Se o card não tem classe flipped, reseta para a frente
   cardNovo.classList.remove('flipped');
-
-  atualizarIndicador();
-  atualizarBotoes();
 
   // Marca como visitado
   visitados.add(indiceAtual);
-  atualizarIndicador();
 
-  // Verifica se acabou
-  verificarFim();
+  atualizarIndicador();
+  atualizarBotoes();
+  atualizarProgresso();
 }
 
 // ===== VIRAR CARD =====
 function virarCard(card) {
-  // Só permite virar se for o card ativo
   if (!card.classList.contains('ativo')) return;
+  if (card.classList.contains('card-final')) return;
 
   const video = card.querySelector('video');
   card.classList.toggle('flipped');
 
-  // Pausa o vídeo se voltar para a frente
   if (video && !card.classList.contains('flipped')) {
     video.pause();
     video.currentTime = 0;
   }
+
+  // Verifica se acabou de virar o último card
+  verificarFim();
 }
 
 // ===== NAVEGAÇÃO =====
 function proximoCard() {
+  // Se já estamos no último card e ele foi virado, vai para o card final
+  if (indiceAtual === totalCards - 1) {
+    const ultimo = todosCards[totalCards - 1];
+    if (ultimo.classList.contains('flipped') && !finalMostrado) {
+      mostrarCardFinal();
+      return;
+    }
+  }
   if (indiceAtual < totalCards - 1) {
     mostrarCard(indiceAtual + 1);
   }
 }
 
 function cardAnterior() {
+  if (finalMostrado) {
+    mostrarCard(totalCards - 1);
+    return;
+  }
   if (indiceAtual > 0) {
     mostrarCard(indiceAtual - 1);
   }
 }
 
+// ===== CARD FINAL =====
+function mostrarCardFinal() {
+  finalMostrado = true;
+  todosCards.forEach(c => c.classList.remove('ativo'));
+  cardFinal.classList.add('ativo');
+
+  // Atualiza botões
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('btnPrev').disabled = false;
+
+  // Atualiza progresso
+  document.getElementById('posAtual').textContent = '✓';
+  document.getElementById('posTotal').textContent = totalCards;
+
+  // Indicador: nenhum ativo, todos visitados
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach(dot => {
+    dot.classList.remove('ativo');
+    dot.classList.add('visitado');
+  });
+}
+
 // ===== BOTÕES =====
 function atualizarBotoes() {
-  document.querySelector('.nav-prev').disabled = indiceAtual === 0;
-  document.querySelector('.nav-next').disabled = indiceAtual === totalCards - 1;
+  document.getElementById('btnPrev').disabled = indiceAtual === 0;
+  document.getElementById('btnNext').disabled = indiceAtual === totalCards - 1;
+}
+
+// ===== PROGRESSO (X de Y) =====
+function atualizarProgresso() {
+  document.getElementById('posAtual').textContent = indiceAtual + 1;
+  document.getElementById('posTotal').textContent = totalCards;
 }
 
 // ===== INDICADOR =====
 function criarIndicador() {
   const indicador = document.getElementById('indicador');
   indicador.innerHTML = '';
-  cards.forEach((_, i) => {
+  todosCards.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'dot';
     dot.setAttribute('aria-label', `Ir para card ${i + 1}`);
@@ -102,39 +141,9 @@ function criarIndicador() {
 function atualizarIndicador() {
   const dots = document.querySelectorAll('.dot');
   dots.forEach((dot, i) => {
-    dot.classList.toggle('ativo', i === indiceAtual);
-    dot.classList.toggle('visitado', visitados.has(i) && i !== indiceAtual);
+    dot.classList.toggle('ativo', i === indiceAtual && !finalMostrado);
+    dot.classList.toggle('visitado', visitados.has(i) && (i !== indiceAtual || finalMostrado));
   });
-}
-
-// ===== SWIPE (ARRastar) =====
-function configurarSwipe() {
-  const viewport = document.getElementById('viewport');
-
-  viewport.addEventListener('touchstart', (e) => {
-    swipeStartX = e.touches[0].clientX;
-    swipeStartY = e.touches[0].clientY;
-    swipeAtivo = true;
-  }, { passive: true });
-
-  viewport.addEventListener('touchend', (e) => {
-    if (!swipeAtivo) return;
-    swipeAtivo = false;
-
-    const fimX = e.changedTouches[0].clientX;
-    const fimY = e.changedTouches[0].clientY;
-    const deltaX = fimX - swipeStartX;
-    const deltaY = fimY - swipeStartY;
-
-    // Só considera swipe horizontal se for maior que vertical
-    if (Math.abs(deltaX) < 50 || Math.abs(deltaX) < Math.abs(deltaY)) return;
-
-    if (deltaX < 0) {
-      proximoCard();  // arrastou para a esquerda → próximo
-    } else {
-      cardAnterior(); // arrastou para a direita → anterior
-    }
-  }, { passive: true });
 }
 
 // ===== TECLADO (desktop) =====
@@ -145,26 +154,26 @@ function configurarTeclado() {
     if (e.key === ' ') {
       e.preventDefault();
       const ativo = document.querySelector('.card.ativo');
-      if (ativo) virarCard(ativo);
+      if (ativo && !ativo.classList.contains('card-final')) virarCard(ativo);
     }
   });
 }
 
 // ===== FIM =====
 function verificarFim() {
-  // Mostra mensagem se todos foram visitados
-  if (visitados.size === totalCards) {
+  // Se o último card foi virado, programa para mostrar o card final
+  const ultimo = todosCards[totalCards - 1];
+  if (ultimo.classList.contains('flipped') && visitados.size === totalCards) {
     setTimeout(() => {
-      document.getElementById('finalMsg').classList.add('visivel');
-    }, 800);
-  } else {
-    document.getElementById('finalMsg').classList.remove('visivel');
+      mostrarCardFinal();
+    }, 1500);
   }
 }
 
 function voltarAoInicio() {
   visitados.clear();
-  document.getElementById('finalMsg').classList.remove('visivel');
+  finalMostrado = false;
+  cardFinal.classList.remove('ativo');
   mostrarCard(0);
 }
 
