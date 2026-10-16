@@ -2,127 +2,138 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Pontos de Atenção - Presidentes Segundo Turno 2026</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Pontos de Atenção — Segundo Turno 2026</h1>
+  <header>
+    <h1>Pontos de Atenção</h1>
+    <p class="subtitulo">Segundo Turno 2026</p>
+  </header>
 
-  <div class="contador" id="contador">
-    <span id="contador-numero">0</span> de <span id="contador-total">8</span> cards virados
+  <div class="carrossel">
+
+    <!-- Botão voltar -->
+    <button class="nav-btn nav-prev" onclick="cardAnterior()" aria-label="Anterior">‹</button>
+
+    <!-- Área dos cards -->
+    <div class="cards-viewport" id="viewport">
+
+      <div class="card tema-azul" data-index="0" onclick="virarCard(this)">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <h2>URNA<br>ELETRÔNICA</h2>
+            <p class="dica">Toque para ver</p>
+          </div>
+          <div class="card-face card-back">
+            <img src="img/urna.jpg" alt="Urna Eletrônica" class="card-img-full">
+          </div>
+        </div>
+      </div>
+
+      <div class="card tema-azul" data-index="1" onclick="virarCard(this)">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <h2>CABINA DE<br>VOTAÇÃO</h2>
+            <p class="dica">Toque para ver o vídeo</p>
+          </div>
+          <div class="card-face card-back">
+            <video controls playsinline>
+              <source src="cabina.mp4" type="video/mp4">
+              Seu navegador não suporta vídeo.
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <div class="card tema-roxo" data-index="2" onclick="virarCard(this)">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <h2>ATA DE<br>SEÇÃO</h2>
+            <p class="dica">O que deve constar</p>
+          </div>
+          <div class="card-face card-back">
+            <img src="img/ata.jpg" alt="Ata de Seção" class="card-img-full">
+          </div>
+        </div>
+      </div>
+
+      <div class="card tema-vermelho" data-index="3" onclick="virarCard(this)">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <h2>IMPEDIDOS<br>DE VOTAR</h2>
+            <p class="dica">Quem não pode votar</p>
+          </div>
+          <div class="card-face card-back">
+            <img src="img/impedidos.jpg" alt="Impedidos de Votar" class="card-img-full">
+          </div>
+        </div>
+      </div>
+
+      <div class="card tema-laranja" data-index="4" onclick="virarCard(this)">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <h2>SÁBADO<br>ATIVIDADES</h2>
+            <p class="dica">Toque para ver</p>
+          </div>
+          <div class="card-face card-back">
+            <img src="img/sabado.jpg" alt="Sábado" class="card-img-full">
+          </div>
+        </div>
+      </div>
+
+      <div class="card tema-verde" data-index="5" onclick="virarCard(this)">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <h2>DOMINGO<br>PRIMEIROS PASSOS</h2>
+            <p class="dica">Na seção</p>
+          </div>
+          <div class="card-face card-back">
+            <img src="img/domingo-inicio.jpg" alt="Primeiros Passos" class="card-img-full">
+          </div>
+        </div>
+      </div>
+
+      <div class="card tema-verde" data-index="6" onclick="virarCard(this)">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <h2>DOMINGO<br>FINALIZAÇÃO</h2>
+            <p class="dica">Encerramento</p>
+          </div>
+          <div class="card-face card-back">
+            <img src="img/domingo-fim.jpg" alt="Finalização" class="card-img-full">
+          </div>
+        </div>
+      </div>
+
+      <div class="card tema-cinza" data-index="7" onclick="virarCard(this)">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <h2>DTE<br>DECLARAÇÃO</h2>
+            <p class="dica">Trabalhos Eleitorais</p>
+          </div>
+          <div class="card-face card-back">
+            <img src="img/dte.jpg" alt="DTE" class="card-img-full">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Botão avançar -->
+    <button class="nav-btn nav-next" onclick="proximoCard()" aria-label="Próximo">›</button>
+
   </div>
 
-  <div class="cards-container">
+  <!-- Indicador de posição -->
+  <div class="indicador" id="indicador"></div>
 
-    <!-- CARD 1: URNA ELETRÔNICA -->
-    <div class="card tema-azul" onclick="virarCard(this)">
-      <div class="card-inner">
-        <div class="card-face card-front">
-          <h2>URNA<br>ELETRÔNICA</h2>
-          <p class="dica">Clique para ver mais</p>
-        </div>
-        <div class="card-face card-back">
-          <img src="img/urna.jpg" alt="Urna Eletrônica" class="card-img-full">
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 2: CABINA DE VOTAÇÃO -->
-    <div class="card tema-azul" onclick="virarCard(this)">
-      <div class="card-inner">
-        <div class="card-face card-front">
-          <h2>CABINA DE<br>VOTAÇÃO</h2>
-          <p class="dica">Clique para ver o vídeo</p>
-        </div>
-        <div class="card-face card-back">
-          <video controls playsinline>
-            <source src="cabina.mp4" type="video/mp4">
-            Seu navegador não suporta vídeo.
-          </video>
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 3: ATA DE SEÇÃO -->
-    <div class="card tema-roxo" onclick="virarCard(this)">
-      <div class="card-inner">
-        <div class="card-face card-front">
-          <h2>ATA DE<br>SEÇÃO</h2>
-          <p class="dica">O que deve constar</p>
-        </div>
-        <div class="card-face card-back">
-          <img src="img/ata.jpg" alt="Ata de Seção" class="card-img-full">
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 4: IMPEDIDOS DE VOTAR -->
-    <div class="card tema-vermelho" onclick="virarCard(this)">
-      <div class="card-inner">
-        <div class="card-face card-front">
-          <h2>IMPEDIDOS<br>DE VOTAR</h2>
-          <p class="dica">Quem não pode votar</p>
-        </div>
-        <div class="card-face card-back">
-          <img src="img/impedidos.jpg" alt="Impedidos de Votar" class="card-img-full">
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 5: SÁBADO -->
-    <div class="card tema-laranja" onclick="virarCard(this)">
-      <div class="card-inner">
-        <div class="card-face card-front">
-          <h2>SÁBADO<br>ATIVIDADES</h2>
-          <p class="dica">Clique para ver</p>
-        </div>
-        <div class="card-face card-back">
-          <img src="img/sabado.jpg" alt="Sábado" class="card-img-full">
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 6: DOMINGO - PRIMEIROS PASSOS -->
-    <div class="card tema-verde" onclick="virarCard(this)">
-      <div class="card-inner">
-        <div class="card-face card-front">
-          <h2>DOMINGO<br>PRIMEIROS PASSOS</h2>
-          <p class="dica">Na seção</p>
-        </div>
-        <div class="card-face card-back">
-          <img src="img/domingo-inicio.jpg" alt="Primeiros Passos" class="card-img-full">
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 7: DOMINGO - FINALIZAÇÃO -->
-    <div class="card tema-verde" onclick="virarCard(this)">
-      <div class="card-inner">
-        <div class="card-face card-front">
-          <h2>DOMINGO<br>FINALIZAÇÃO</h2>
-          <p class="dica">Encerramento</p>
-        </div>
-        <div class="card-face card-back">
-          <img src="img/domingo-fim.jpg" alt="Finalização" class="card-img-full">
-        </div>
-      </div>
-    </div>
-
-    <!-- CARD 8: DTE -->
-    <div class="card tema-cinza" onclick="virarCard(this)">
-      <div class="card-inner">
-        <div class="card-face card-front">
-          <h2>DTE<br>DECLARAÇÃO</h2>
-          <p class="dica">Trabalhos Eleitorais</p>
-        </div>
-        <div class="card-face card-back">
-          <img src="img/dte.jpg" alt="DTE" class="card-img-full">
-        </div>
-      </div>
-    </div>
-
+  <!-- Mensagem final -->
+  <div class="final-msg" id="finalMsg">
+    🎉 Você viu todos os cards!
+    <button onclick="voltarAoInicio()">Recomeçar</button>
   </div>
 
   <script src="script.js"></script>
