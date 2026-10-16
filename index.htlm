@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards Interativos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Cards Interativos</h1>
+
+  <div class="cards-container">
+
+    <!-- CARD 1: URNA ELETRÔNICA -->
+    <div class="card" onclick="virarCard(this)">
+      <div class="card-inner">
+        <div class="card-face card-front">
+          <h2>URNA<br>ELETRÔNICA</h2>
+          <p class="dica">Clique para ver mais</p>
+        </div>
+        <div class="card-face card-back">
+          <h3>Urna Eletrônica</h3>
+          <p>Dispositivo usado no Brasil desde 1996 para registrar votos de forma eletrônica e segura.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: CABINA DE VOTAÇÃO -->
+    <div class="card" onclick="virarCard(this)">
+      <div class="card-inner">
+        <div class="card-face card-front">
+          <h2>CABINA DE<br>VOTAÇÃO</h2>
+          <p class="dica">Clique para ver o vídeo</p>
+        </div>
+        <div class="card-face card-back">
+          <h3>Cabina de Votação</h3>
+          <video controls playsinline>
+            <source src="cabina.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+          </video>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
