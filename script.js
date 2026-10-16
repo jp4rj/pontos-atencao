@@ -5,6 +5,7 @@ const cardFinal = document.getElementById('cardFinal');
 const totalCards = todosCards.length;
 const visitados = new Set();
 let finalMostrado = false;
+let timerCardFinal = null;
 
 // ===== INICIALIZAÇÃO =====
 function init() {
@@ -17,6 +18,12 @@ function init() {
 // ===== MOSTRAR CARD =====
 function mostrarCard(novoIndice) {
   if (novoIndice < 0 || novoIndice >= totalCards) return;
+
+  // Cancela timer do card final se estava contando
+  if (timerCardFinal) {
+    clearTimeout(timerCardFinal);
+    timerCardFinal = null;
+  }
 
   finalMostrado = false;
   cardFinal.classList.remove('ativo');
@@ -65,10 +72,12 @@ function virarCard(card) {
 
 // ===== NAVEGAÇÃO =====
 function proximoCard() {
+  if (finalMostrado) return;
+
   // Se já estamos no último card e ele foi virado, vai para o card final
   if (indiceAtual === totalCards - 1) {
     const ultimo = todosCards[totalCards - 1];
-    if (ultimo.classList.contains('flipped') && !finalMostrado) {
+    if (ultimo.classList.contains('flipped')) {
       mostrarCardFinal();
       return;
     }
@@ -90,19 +99,22 @@ function cardAnterior() {
 
 // ===== CARD FINAL =====
 function mostrarCardFinal() {
+  // Cancela timer pendente
+  if (timerCardFinal) {
+    clearTimeout(timerCardFinal);
+    timerCardFinal = null;
+  }
+
   finalMostrado = true;
   todosCards.forEach(c => c.classList.remove('ativo'));
   cardFinal.classList.add('ativo');
 
-  // Atualiza botões
   document.getElementById('btnNext').disabled = true;
   document.getElementById('btnPrev').disabled = false;
 
-  // Atualiza progresso
   document.getElementById('posAtual').textContent = '✓';
   document.getElementById('posTotal').textContent = totalCards;
 
-  // Indicador: nenhum ativo, todos visitados
   const dots = document.querySelectorAll('.dot');
   dots.forEach(dot => {
     dot.classList.remove('ativo');
@@ -161,16 +173,29 @@ function configurarTeclado() {
 
 // ===== FIM =====
 function verificarFim() {
-  // Se o último card foi virado, programa para mostrar o card final
   const ultimo = todosCards[totalCards - 1];
+
   if (ultimo.classList.contains('flipped') && visitados.size === totalCards) {
-    setTimeout(() => {
-      mostrarCardFinal();
-    }, 1500);
+    // Cancela timer anterior, se houver
+    if (timerCardFinal) clearTimeout(timerCardFinal);
+
+    timerCardFinal = setTimeout(() => {
+      // Só mostra se o usuário ainda está no último card e ele continua virado
+      if (indiceAtual === totalCards - 1 &&
+          todosCards[totalCards - 1].classList.contains('flipped') &&
+          !finalMostrado) {
+        mostrarCardFinal();
+      }
+      timerCardFinal = null;
+    }, 10000); // 10 segundos
   }
 }
 
 function voltarAoInicio() {
+  if (timerCardFinal) {
+    clearTimeout(timerCardFinal);
+    timerCardFinal = null;
+  }
   visitados.clear();
   finalMostrado = false;
   cardFinal.classList.remove('ativo');
