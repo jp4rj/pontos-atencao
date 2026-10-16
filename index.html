@@ -14,8 +14,6 @@
   </header>
 
   <div class="carrossel">
-
-    <!-- Área dos cards -->
     <div class="cards-viewport" id="viewport">
 
       <div class="card tema-azul" data-index="0" onclick="virarCard(this)">
@@ -117,18 +115,28 @@
         </div>
       </div>
 
+      <!-- CARD FINAL DE PARABÉNS -->
+      <div class="card card-final" id="cardFinal" onclick="event.stopPropagation()">
+        <div class="card-face card-front">
+          <div class="emoji-final">🎉</div>
+          <h2>PARABÉNS!</h2>
+          <p class="mensagem-final">Você viu todos os cards.</p>
+          <button class="btn-recomecar" onclick="voltarAoInicio()">Recomeçar</button>
+        </div>
+      </div>
+
     </div>
-
   </div>
 
-  <!-- Indicador de posição -->
+  <div class="barra-nav">
+    <button class="nav-btn" id="btnPrev" onclick="cardAnterior()" aria-label="Card anterior">‹</button>
+    <div class="progresso" id="progresso">
+      <span id="posAtual">1</span> de <span id="posTotal">8</span>
+    </div>
+    <button class="nav-btn" id="btnNext" onclick="proximoCard()" aria-label="Próximo card">›</button>
+  </div>
+
   <div class="indicador" id="indicador"></div>
-
-  <!-- Mensagem final -->
-  <div class="final-msg" id="finalMsg">
-    🎉 Você viu todos os cards!
-    <button onclick="voltarAoInicio()">Recomeçar</button>
-  </div>
 
   <script src="script.js"></script>
 </body>
