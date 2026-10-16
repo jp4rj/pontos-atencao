@@ -217,7 +217,56 @@ h1 {
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(4, 120, 87, 0.3);
 }
+/* ===== CARD FINAL DE PARABÉNS ===== */
+.card-final .card-front {
+  background: linear-gradient(135deg, #047857, #10b981, #34d399);
+  padding: 32px 24px;
+}
 
+.card-final .emoji-final {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.card-final h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  letter-spacing: 1.5px;
+}
+
+.card-final .mensagem-final {
+  font-size: 1rem;
+  opacity: 0.95;
+  margin-bottom: 28px;
+  line-height: 1.4;
+  max-width: 220px;
+}
+
+.btn-recomecar {
+  padding: 14px 32px;
+  border: 2px solid #fff;
+  border-radius: 30px;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.btn-recomecar:hover,
+.btn-recomecar:active {
+  background: #fff;
+  color: #047857;
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
 /* ===== DESKTOP ===== */
 @media (min-width: 700px) {
   h1 { font-size: 1.4rem; }
