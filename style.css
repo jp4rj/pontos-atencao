@@ -43,9 +43,9 @@ h1 {
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 500px;
+  max-width: 560px;
   position: relative;
-  padding: 0 50px;
+  padding: 0 12px;
   min-height: 0;
 }
 
@@ -64,7 +64,7 @@ h1 {
   position: absolute;
   width: 100%;
   height: 100%;
-  max-width: 320px;
+  max-width: 420px;
   max-height: 100%;
   aspect-ratio: 2 / 3;
   cursor: pointer;
@@ -159,44 +159,6 @@ h1 {
   background: #000;
 }
 
-/* ===== BOTÕES DE NAVEGAÇÃO ===== */
-.nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: none;
-  background: #fff;
-  color: #1e3c72;
-  font-size: 1.8rem;
-  font-weight: bold;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  z-index: 10;
-  padding-bottom: 4px;
-}
-
-.nav-btn:hover {
-  background: #1e3c72;
-  color: #fff;
-  transform: translateY(-50%) scale(1.1);
-}
-
-.nav-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.nav-prev { left: 0; }
-.nav-next { right: 0; }
-
 /* ===== INDICADOR (PONTINHOS) ===== */
 .indicador {
   display: flex;
@@ -259,8 +221,7 @@ h1 {
 /* ===== DESKTOP ===== */
 @media (min-width: 700px) {
   h1 { font-size: 1.4rem; }
-  .card { max-width: 360px; }
+  .card { max-width: 460px; }
   .card-front h2 { font-size: 2rem; }
-  .carrossel { padding: 0 70px; }
-  .nav-btn { width: 50px; height: 50px; font-size: 2rem; }
+  .carrossel { max-width: 620px; padding: 0 20px; }
 }
