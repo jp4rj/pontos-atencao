@@ -19,7 +19,6 @@ function init() {
 function mostrarCard(novoIndice) {
   if (novoIndice < 0 || novoIndice >= totalCards) return;
 
-  // Cancela timer do card final se estava contando
   if (timerCardFinal) {
     clearTimeout(timerCardFinal);
     timerCardFinal = null;
@@ -28,7 +27,6 @@ function mostrarCard(novoIndice) {
   finalMostrado = false;
   cardFinal.classList.remove('ativo');
 
-  // Pausa vídeo do card que está saindo
   const cardSaindo = todosCards[indiceAtual];
   const videoSaindo = cardSaindo.querySelector('video');
   if (videoSaindo) {
@@ -36,21 +34,19 @@ function mostrarCard(novoIndice) {
     videoSaindo.currentTime = 0;
   }
 
-  // Remove classe ativo de todos
   todosCards.forEach(c => c.classList.remove('ativo'));
 
-  // Ativa o novo
   indiceAtual = novoIndice;
   const cardNovo = todosCards[indiceAtual];
   cardNovo.classList.add('ativo');
   cardNovo.classList.remove('flipped');
 
-  // Marca como visitado
   visitados.add(indiceAtual);
 
   atualizarIndicador();
   atualizarBotoes();
   atualizarProgresso();
+  atualizarBarraTitulo();
 }
 
 // ===== VIRAR CARD =====
@@ -66,7 +62,6 @@ function virarCard(card) {
     video.currentTime = 0;
   }
 
-  // Verifica se acabou de virar o último card
   verificarFim();
 }
 
@@ -74,7 +69,6 @@ function virarCard(card) {
 function proximoCard() {
   if (finalMostrado) return;
 
-  // Se já estamos no último card e ele foi virado, vai para o card final
   if (indiceAtual === totalCards - 1) {
     const ultimo = todosCards[totalCards - 1];
     if (ultimo.classList.contains('flipped')) {
@@ -99,7 +93,6 @@ function cardAnterior() {
 
 // ===== CARD FINAL =====
 function mostrarCardFinal() {
-  // Cancela timer pendente
   if (timerCardFinal) {
     clearTimeout(timerCardFinal);
     timerCardFinal = null;
@@ -120,6 +113,14 @@ function mostrarCardFinal() {
     dot.classList.remove('ativo');
     dot.classList.add('visitado');
   });
+
+  // Barra 100% com texto de concluído
+  const barra = document.getElementById('barraPreenchimento');
+  const texto = document.getElementById('barraTexto');
+  barra.style.width = '100%';
+  texto.textContent = '🎉 CONCLUÍDO!';
+  texto.style.color = '#fff';
+  texto.style.textShadow = '0 2px 4px rgba(0,0,0,0.3)';
 }
 
 // ===== BOTÕES =====
@@ -132,6 +133,21 @@ function atualizarBotoes() {
 function atualizarProgresso() {
   document.getElementById('posAtual').textContent = indiceAtual + 1;
   document.getElementById('posTotal').textContent = totalCards;
+}
+
+// ===== BARRA DE TÍTULO (progresso visual) =====
+function atualizarBarraTitulo() {
+  const total = totalCards + 1; // inclui o card final
+  const progresso = ((indiceAtual + 1) / total) * 100;
+  document.getElementById('barraPreenchimento').style.width = progresso + '%';
+
+  // Restaura texto padrão se não estiver no card final
+  const texto = document.getElementById('barraTexto');
+  if (!finalMostrado) {
+    texto.textContent = 'PONTOS DE ATENÇÃO';
+    texto.style.color = '#1e3c72';
+    texto.style.textShadow = '0 1px 2px rgba(255,255,255,0.8), 0 0 8px rgba(255,255,255,0.6)';
+  }
 }
 
 // ===== INDICADOR =====
@@ -158,7 +174,7 @@ function atualizarIndicador() {
   });
 }
 
-// ===== TECLADO (desktop) =====
+// ===== TECLADO =====
 function configurarTeclado() {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') proximoCard();
@@ -176,18 +192,16 @@ function verificarFim() {
   const ultimo = todosCards[totalCards - 1];
 
   if (ultimo.classList.contains('flipped') && visitados.size === totalCards) {
-    // Cancela timer anterior, se houver
     if (timerCardFinal) clearTimeout(timerCardFinal);
 
     timerCardFinal = setTimeout(() => {
-      // Só mostra se o usuário ainda está no último card e ele continua virado
       if (indiceAtual === totalCards - 1 &&
           todosCards[totalCards - 1].classList.contains('flipped') &&
           !finalMostrado) {
         mostrarCardFinal();
       }
       timerCardFinal = null;
-    }, 10000); // 10 segundos
+    }, 10000);
   }
 }
 
