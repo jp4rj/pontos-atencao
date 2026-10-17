@@ -17,23 +17,43 @@ body {
   padding: 10px;
 }
 
-/* ===== CABEÇALHO ===== */
-header {
-  text-align: center;
-  padding: 6px 0 2px;
+/* ===== BARRA DE PROGRESSO COM TÍTULO ===== */
+.barra-titulo {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  height: 52px;
+  background: #e5e7eb;
+  border-radius: 26px;
+  overflow: hidden;
   flex-shrink: 0;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
-h1 {
+.barra-preenchimento {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 11%; /* inicia em 1/9 */
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  border-radius: 26px;
+  transition: width 0.5s ease;
+}
+
+.barra-texto {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   color: #1e3c72;
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-}
-
-.subtitulo {
-  color: #666;
-  font-size: 0.78rem;
-  margin-top: 2px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 /* ===== CARROSSEL ===== */
@@ -70,14 +90,14 @@ h1 {
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
-  transform: scale(0.85);
-  transition: opacity 0.4s, transform 0.4s;
+  transform: translateY(30px) scale(0.95);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .card.ativo {
   opacity: 1;
   pointer-events: auto;
-  transform: scale(1);
+  transform: translateY(0) scale(1);
 }
 
 .card-inner {
@@ -114,20 +134,28 @@ h1 {
   color: #fff;
 }
 
+.icone-card {
+  font-size: 2.8rem;
+  margin-bottom: 14px;
+  line-height: 1;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+}
+
 .card-front h2 {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   letter-spacing: 1px;
   line-height: 1.25;
 }
 
 .dica {
   position: absolute;
-  bottom: 24px;
+  bottom: 22px;
   font-size: 0.8rem;
   opacity: 0.75;
 }
 
 /* ===== CORES POR TEMA ===== */
+.tema-intro .card-front    { background: linear-gradient(135deg, #b91c1c, #ef4444, #f59e0b); }
 .tema-azul .card-front     { background: linear-gradient(135deg, #1e3c72, #2a5298); }
 .tema-roxo .card-front     { background: linear-gradient(135deg, #6a11cb, #8e44ad); }
 .tema-vermelho .card-front { background: linear-gradient(135deg, #b91c1c, #e63946); }
@@ -157,6 +185,47 @@ h1 {
   object-fit: contain;
   display: block;
   background: #000;
+}
+
+/* ===== VERSO DO CARD DE INTRODUÇÃO ===== */
+.card-intro-verso {
+  background: linear-gradient(135deg, #fff7ed, #fef3c7);
+  padding: 28px 22px;
+}
+
+.intro-conteudo {
+  text-align: center;
+  color: #1e3c72;
+}
+
+.intro-emoji {
+  font-size: 3rem;
+  margin-bottom: 14px;
+}
+
+.intro-conteudo h3 {
+  font-size: 1.3rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+  color: #b91c1c;
+}
+
+.intro-conteudo p {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.intro-conteudo strong {
+  color: #b91c1c;
+}
+
+.intro-dica {
+  margin-top: 18px;
+  font-style: italic;
+  color: #666 !important;
+  font-size: 0.85rem !important;
 }
 
 /* ===== BARRA DE NAVEGAÇÃO ===== */
@@ -307,9 +376,11 @@ h1 {
 
 /* ===== DESKTOP ===== */
 @media (min-width: 700px) {
-  h1 { font-size: 1.4rem; }
+  .barra-titulo { height: 60px; margin-bottom: 16px; }
+  .barra-texto { font-size: 1.2rem; letter-spacing: 1.5px; }
   .card { max-width: 460px; }
   .card-front h2 { font-size: 2rem; }
+  .icone-card { font-size: 3.2rem; }
   .carrossel { max-width: 620px; padding: 0 20px; }
   .nav-btn { width: 66px; height: 66px; font-size: 2.5rem; }
   .progresso { font-size: 1.15rem; padding: 14px 26px; }
