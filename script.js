@@ -23,9 +23,10 @@ let finalMostrado = false;
 let timerCardFinal = null;
 let codigoAtual = "";
 
-// ===== ESTADO DO CARD ATA (revelação progressiva) =====
+// ===== ESTADO DO CARD ATA =====
 let ataRevelados = 0;
 const ataTotalItens = 5;
+const indiceCardAta = 3; // O card da ATA é o data-index 3
 
 // ===== MODO ESCURO =====
 function initModo() {
@@ -57,7 +58,7 @@ function sortearCodigo() {
 }
 
 function enviarWhatsapp() {
-  const mensagem = `Olá! Concluí o material "Pontos de Atenção - Segundo Turno 2026" da 004ª ZE-RJ.\n\nMeu código: ${codigoAtual}\n\nEnvie somente se essa comunicação direta faz sentido pra você ;-)`;
+  const mensagem = `Olá! Concluí o material "Pontos de Atenção - Segundo Turno 2026" da 004ª ZE-RJ.\n\nMeu código: ${codigoAtual}\n\nEnvie para nosso WhatsApp apenas se essa comunicação direta fizer sentido para você 😉`;
   const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
   window.open(url, '_blank');
 }
@@ -128,16 +129,20 @@ function proximoCard() {
   if (finalMostrado) return;
 
   const cardAtual = todosCards[indiceAtual];
-  if (!cardAtual.classList.contains('flipped')) {
-    return;
+  
+  // Validação: no card da ATA, exige todos os 5 itens revelados
+  if (indiceAtual === indiceCardAta) {
+    if (ataRevelados < ataTotalItens) return; // Bloqueia se não revelou tudo
+  } else {
+    // Nos outros cards, exige que o card esteja virado
+    if (!cardAtual.classList.contains('flipped')) return;
   }
 
   if (indiceAtual === totalCards - 1) {
-    if (cardAtual.classList.contains('flipped')) {
-      mostrarCardFinal();
-      return;
-    }
+    mostrarCardFinal();
+    return;
   }
+  
   if (indiceAtual < totalCards - 1) {
     mostrarCard(indiceAtual + 1);
   }
@@ -183,7 +188,6 @@ function mostrarCardFinal() {
   texto.style.color = '#fff';
   texto.style.textShadow = '0 2px 4px rgba(0,0,0,0.3)';
 
-  // Sorteia o código de conclusão
   sortearCodigo();
 }
 
@@ -191,9 +195,17 @@ function mostrarCardFinal() {
 function atualizarBotoes() {
   const cardAtual = todosCards[indiceAtual];
   const foiVirado = cardAtual.classList.contains('flipped');
+  
+  // Regra especial para o card da ATA
+  let podeAvancar = false;
+  if (indiceAtual === indiceCardAta) {
+    podeAvancar = (ataRevelados >= ataTotalItens);
+  } else {
+    podeAvancar = foiVirado;
+  }
 
   document.getElementById('btnPrev').disabled = indiceAtual === 0;
-  document.getElementById('btnNext').disabled = !foiVirado;
+  document.getElementById('btnNext').disabled = !podeAvancar;
 }
 
 // ===== PROGRESSO (X de Y) =====
@@ -249,6 +261,7 @@ function resetarAta() {
   const extra = document.getElementById('ataExtra');
   if (extra) extra.classList.remove('revelado');
   atualizarContadorAta();
+  atualizarBotoes();
 }
 
 function revelarProximoItemAta() {
@@ -258,6 +271,7 @@ function revelarProximoItemAta() {
       item.classList.add('revelado');
       ataRevelados++;
       atualizarContadorAta();
+      atualizarBotoes(); // Atualiza a seta de avançar
     }
   } else {
     const extra = document.getElementById('ataExtra');
