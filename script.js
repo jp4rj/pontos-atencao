@@ -7,12 +7,17 @@ const visitados = new Set();
 let finalMostrado = false;
 let timerCardFinal = null;
 
+// ===== ESTADO DO CARD ATA (revelação progressiva) =====
+let ataRevelados = 0;
+const ataTotalItens = 5;
+
 // ===== INICIALIZAÇÃO =====
 function init() {
   criarIndicador();
   mostrarCard(0);
   configurarTeclado();
   atualizarProgresso();
+  resetarAta();
 }
 
 // ===== MOSTRAR CARD =====
@@ -62,6 +67,9 @@ function virarCard(card) {
     video.currentTime = 0;
   }
 
+  // Atualiza a seta de navegação (bloqueia até virar)
+  atualizarBotoes();
+
   verificarFim();
 }
 
@@ -69,9 +77,14 @@ function virarCard(card) {
 function proximoCard() {
   if (finalMostrado) return;
 
+  // Bloqueia se o card atual não foi virado
+  const cardAtual = todosCards[indiceAtual];
+  if (!cardAtual.classList.contains('flipped')) {
+    return;
+  }
+
   if (indiceAtual === totalCards - 1) {
-    const ultimo = todosCards[totalCards - 1];
-    if (ultimo.classList.contains('flipped')) {
+    if (cardAtual.classList.contains('flipped')) {
       mostrarCardFinal();
       return;
     }
@@ -124,8 +137,12 @@ function mostrarCardFinal() {
 
 // ===== BOTÕES =====
 function atualizarBotoes() {
+  const cardAtual = todosCards[indiceAtual];
+  const foiVirado = cardAtual.classList.contains('flipped');
+
   document.getElementById('btnPrev').disabled = indiceAtual === 0;
-  document.getElementById('btnNext').disabled = indiceAtual === totalCards - 1;
+  // Seta avançar só habilita se o card foi virado (exceto no card final)
+  document.getElementById('btnNext').disabled = !foiVirado;
 }
 
 // ===== PROGRESSO (X de Y) =====
@@ -138,81 +155,4 @@ function atualizarProgresso() {
 function atualizarBarraTitulo() {
   const total = totalCards + 1;
   const progresso = ((indiceAtual + 1) / total) * 100;
-  document.getElementById('barraPreenchimento').style.width = progresso + '%';
-
-  const texto = document.getElementById('barraTexto');
-  if (!finalMostrado) {
-    texto.textContent = 'PONTOS DE ATENÇÃO';
-    texto.style.color = '#1e3c72';
-    texto.style.textShadow = '0 1px 2px rgba(255,255,255,0.8), 0 0 8px rgba(255,255,255,0.6)';
-  }
-}
-
-// ===== INDICADOR =====
-function criarIndicador() {
-  const indicador = document.getElementById('indicador');
-  indicador.innerHTML = '';
-  todosCards.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'dot';
-    dot.setAttribute('aria-label', `Ir para card ${i + 1}`);
-    dot.addEventListener('click', (e) => {
-      e.stopPropagation();
-      mostrarCard(i);
-    });
-    indicador.appendChild(dot);
-  });
-}
-
-function atualizarIndicador() {
-  const dots = document.querySelectorAll('.dot');
-  dots.forEach((dot, i) => {
-    dot.classList.toggle('ativo', i === indiceAtual && !finalMostrado);
-    dot.classList.toggle('visitado', visitados.has(i) && (i !== indiceAtual || finalMostrado));
-  });
-}
-
-// ===== TECLADO =====
-function configurarTeclado() {
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') proximoCard();
-    if (e.key === 'ArrowLeft') cardAnterior();
-    if (e.key === ' ') {
-      e.preventDefault();
-      const ativo = document.querySelector('.card.ativo');
-      if (ativo && !ativo.classList.contains('card-final')) virarCard(ativo);
-    }
-  });
-}
-
-// ===== FIM =====
-function verificarFim() {
-  const ultimo = todosCards[totalCards - 1];
-
-  if (ultimo.classList.contains('flipped') && visitados.size === totalCards) {
-    if (timerCardFinal) clearTimeout(timerCardFinal);
-
-    timerCardFinal = setTimeout(() => {
-      if (indiceAtual === totalCards - 1 &&
-          todosCards[totalCards - 1].classList.contains('flipped') &&
-          !finalMostrado) {
-        mostrarCardFinal();
-      }
-      timerCardFinal = null;
-    }, 10000);
-  }
-}
-
-function voltarAoInicio() {
-  if (timerCardFinal) {
-    clearTimeout(timerCardFinal);
-    timerCardFinal = null;
-  }
-  visitados.clear();
-  finalMostrado = false;
-  cardFinal.classList.remove('ativo');
-  mostrarCard(0);
-}
-
-// ===== START =====
-document.addEventListener('DOMContentLoaded', init);
+  document.getElementById('barraPreench
