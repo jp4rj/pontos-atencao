@@ -736,7 +736,7 @@ body.escuro .dot.visitado {
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
   transition: all 0.25s;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   width: 100%;
   max-width: 260px;
 }
@@ -750,6 +750,17 @@ body.escuro .dot.visitado {
 .whatsapp-icon {
   width: 20px;
   height: 20px;
+}
+
+/* Aviso do WhatsApp */
+.aviso-whatsapp {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  margin-bottom: 12px;
+  max-width: 240px;
+  font-style: italic;
 }
 
 /* Botão Recomeçar */
@@ -799,4 +810,5 @@ body.escuro .dot.visitado {
   .codigo-valor { font-size: 1.8rem; }
   .btn-whatsapp { font-size: 1rem; padding: 14px 28px; }
   .btn-recomecar { font-size: 1rem; padding: 12px 32px; }
+  .aviso-whatsapp { font-size: 0.85rem; max-width: 280px; }
 }
