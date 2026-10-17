@@ -8,17 +8,39 @@
 </head>
 <body>
 
-  <header>
-    <h1>Pontos de Atenção</h1>
-    <p class="subtitulo">Segundo Turno 2026</p>
-  </header>
+  <!-- BARRA DE PROGRESSO COM TÍTULO DENTRO -->
+  <div class="barra-titulo" id="barraTitulo">
+    <div class="barra-preenchimento" id="barraPreenchimento"></div>
+    <span class="barra-texto" id="barraTexto">PONTOS DE ATENÇÃO</span>
+  </div>
 
   <div class="carrossel">
     <div class="cards-viewport" id="viewport">
 
-      <div class="card tema-azul" data-index="0" onclick="virarCard(this)">
+      <!-- CARD 0: INTRODUÇÃO -->
+      <div class="card tema-intro" data-index="0" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
+            <div class="icone-card">🚨</div>
+            <h2>PONTO DE<br>ATENÇÃO</h2>
+            <p class="dica">Toque para começar</p>
+          </div>
+          <div class="card-face card-back card-intro-verso">
+            <div class="intro-conteudo">
+              <div class="intro-emoji">🎯</div>
+              <h3>OBJETIVO</h3>
+              <p>Este material reúne os principais <strong>pontos de atenção</strong> para o trabalho no <strong>Segundo Turno das Eleições 2026</strong>.</p>
+              <p class="intro-dica">Toque em cada card para ver as informações importantes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 1: URNA ELETRÔNICA -->
+      <div class="card tema-azul" data-index="1" onclick="virarCard(this)">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="icone-card">🗳️</div>
             <h2>URNA<br>ELETRÔNICA</h2>
             <p class="dica">Toque para ver</p>
           </div>
@@ -28,9 +50,11 @@
         </div>
       </div>
 
-      <div class="card tema-azul" data-index="1" onclick="virarCard(this)">
+      <!-- CARD 2: CABINA DE VOTAÇÃO -->
+      <div class="card tema-azul" data-index="2" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
+            <div class="icone-card">🚪</div>
             <h2>CABINA DE<br>VOTAÇÃO</h2>
             <p class="dica">Toque para ver o vídeo</p>
           </div>
@@ -43,9 +67,11 @@
         </div>
       </div>
 
-      <div class="card tema-roxo" data-index="2" onclick="virarCard(this)">
+      <!-- CARD 3: ATA DE SEÇÃO -->
+      <div class="card tema-roxo" data-index="3" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
+            <div class="icone-card">📋</div>
             <h2>ATA DE<br>SEÇÃO</h2>
             <p class="dica">O que deve constar</p>
           </div>
@@ -55,9 +81,11 @@
         </div>
       </div>
 
-      <div class="card tema-vermelho" data-index="3" onclick="virarCard(this)">
+      <!-- CARD 4: IMPEDIDOS DE VOTAR -->
+      <div class="card tema-vermelho" data-index="4" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
+            <div class="icone-card">🚫</div>
             <h2>IMPEDIDOS<br>DE VOTAR</h2>
             <p class="dica">Quem não pode votar</p>
           </div>
@@ -67,9 +95,11 @@
         </div>
       </div>
 
-      <div class="card tema-laranja" data-index="4" onclick="virarCard(this)">
+      <!-- CARD 5: SÁBADO -->
+      <div class="card tema-laranja" data-index="5" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
+            <div class="icone-card">📅</div>
             <h2>SÁBADO<br>ATIVIDADES</h2>
             <p class="dica">Toque para ver</p>
           </div>
@@ -79,9 +109,11 @@
         </div>
       </div>
 
-      <div class="card tema-verde" data-index="5" onclick="virarCard(this)">
+      <!-- CARD 6: DOMINGO - PRIMEIROS PASSOS -->
+      <div class="card tema-verde" data-index="6" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
+            <div class="icone-card">🌅</div>
             <h2>DOMINGO<br>PRIMEIROS PASSOS</h2>
             <p class="dica">Na seção</p>
           </div>
@@ -91,9 +123,11 @@
         </div>
       </div>
 
-      <div class="card tema-verde" data-index="6" onclick="virarCard(this)">
+      <!-- CARD 7: DOMINGO - FINALIZAÇÃO -->
+      <div class="card tema-verde" data-index="7" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
+            <div class="icone-card">🌇</div>
             <h2>DOMINGO<br>FINALIZAÇÃO</h2>
             <p class="dica">Encerramento</p>
           </div>
@@ -103,9 +137,11 @@
         </div>
       </div>
 
-      <div class="card tema-cinza" data-index="7" onclick="virarCard(this)">
+      <!-- CARD 8: DTE -->
+      <div class="card tema-cinza" data-index="8" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
+            <div class="icone-card">📄</div>
             <h2>DTE<br>DECLARAÇÃO</h2>
             <p class="dica">Trabalhos Eleitorais</p>
           </div>
@@ -131,7 +167,7 @@
   <div class="barra-nav">
     <button class="nav-btn" id="btnPrev" onclick="cardAnterior()" aria-label="Card anterior">‹</button>
     <div class="progresso" id="progresso">
-      <span id="posAtual">1</span> de <span id="posTotal">8</span>
+      <span id="posAtual">1</span> de <span id="posTotal">9</span>
     </div>
     <button class="nav-btn" id="btnNext" onclick="proximoCard()" aria-label="Próximo card">›</button>
   </div>
