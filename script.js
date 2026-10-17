@@ -114,7 +114,6 @@ function mostrarCardFinal() {
     dot.classList.add('visitado');
   });
 
-  // Barra 100% com texto de concluído
   const barra = document.getElementById('barraPreenchimento');
   const texto = document.getElementById('barraTexto');
   barra.style.width = '100%';
@@ -135,13 +134,12 @@ function atualizarProgresso() {
   document.getElementById('posTotal').textContent = totalCards;
 }
 
-// ===== BARRA DE TÍTULO (progresso visual) =====
+// ===== BARRA DE TÍTULO =====
 function atualizarBarraTitulo() {
-  const total = totalCards + 1; // inclui o card final
+  const total = totalCards + 1;
   const progresso = ((indiceAtual + 1) / total) * 100;
   document.getElementById('barraPreenchimento').style.width = progresso + '%';
 
-  // Restaura texto padrão se não estiver no card final
   const texto = document.getElementById('barraTexto');
   if (!finalMostrado) {
     texto.textContent = 'PONTOS DE ATENÇÃO';
