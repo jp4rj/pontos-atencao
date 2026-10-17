@@ -1,3 +1,18 @@
+// ===== CONFIGURAÇÕES =====
+const WHATSAPP_NUMERO = "5521986233071";
+const CODIGOS = [
+  "URNA",
+  "DEMOCRACIA",
+  "CIDADANIA",
+  "VOTO",
+  "MESARIO",
+  "ELEICAO",
+  "ZERESIMA",
+  "BOLETIM",
+  "SECAO",
+  "SEGUNDO-TURNO"
+];
+
 // ===== ESTADO =====
 let indiceAtual = 0;
 const todosCards = document.querySelectorAll('.card:not(.card-final)');
@@ -6,13 +21,50 @@ const totalCards = todosCards.length;
 const visitados = new Set();
 let finalMostrado = false;
 let timerCardFinal = null;
+let codigoAtual = "";
 
 // ===== ESTADO DO CARD ATA (revelação progressiva) =====
 let ataRevelados = 0;
 const ataTotalItens = 5;
 
+// ===== MODO ESCURO =====
+function initModo() {
+  const modoSalvo = localStorage.getItem('modo');
+  if (modoSalvo === 'escuro') {
+    document.body.classList.add('escuro');
+    document.getElementById('iconeModo').textContent = '☀️';
+  }
+}
+
+function alternarModo() {
+  const body = document.body;
+  const icone = document.getElementById('iconeModo');
+  body.classList.toggle('escuro');
+  if (body.classList.contains('escuro')) {
+    localStorage.setItem('modo', 'escuro');
+    icone.textContent = '☀️';
+  } else {
+    localStorage.setItem('modo', 'claro');
+    icone.textContent = '🌙';
+  }
+}
+
+// ===== CÓDIGO E WHATSAPP =====
+function sortearCodigo() {
+  const indice = Math.floor(Math.random() * CODIGOS.length);
+  codigoAtual = CODIGOS[indice];
+  document.getElementById('codigoValor').textContent = codigoAtual;
+}
+
+function enviarWhatsapp() {
+  const mensagem = `Olá! Concluí o material "Pontos de Atenção - Segundo Turno 2026" da 004ª ZE-RJ.\n\nMeu código: ${codigoAtual}\n\nEnvie somente se essa comunicação direta faz sentido pra você ;-)`;
+  const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
+  window.open(url, '_blank');
+}
+
 // ===== INICIALIZAÇÃO =====
 function init() {
+  initModo();
   criarIndicador();
   mostrarCard(0);
   configurarTeclado();
@@ -67,9 +119,7 @@ function virarCard(card) {
     video.currentTime = 0;
   }
 
-  // Atualiza a seta de navegação (bloqueia até virar)
   atualizarBotoes();
-
   verificarFim();
 }
 
@@ -77,7 +127,6 @@ function virarCard(card) {
 function proximoCard() {
   if (finalMostrado) return;
 
-  // Bloqueia se o card atual não foi virado
   const cardAtual = todosCards[indiceAtual];
   if (!cardAtual.classList.contains('flipped')) {
     return;
@@ -133,6 +182,9 @@ function mostrarCardFinal() {
   texto.textContent = '🎉 CONCLUÍDO!';
   texto.style.color = '#fff';
   texto.style.textShadow = '0 2px 4px rgba(0,0,0,0.3)';
+
+  // Sorteia o código de conclusão
+  sortearCodigo();
 }
 
 // ===== BOTÕES =====
@@ -141,7 +193,6 @@ function atualizarBotoes() {
   const foiVirado = cardAtual.classList.contains('flipped');
 
   document.getElementById('btnPrev').disabled = indiceAtual === 0;
-  // Seta avançar só habilita se o card foi virado (exceto no card final)
   document.getElementById('btnNext').disabled = !foiVirado;
 }
 
@@ -160,8 +211,8 @@ function atualizarBarraTitulo() {
   const texto = document.getElementById('barraTexto');
   if (!finalMostrado) {
     texto.textContent = 'PONTOS DE ATENÇÃO';
-    texto.style.color = '#1e3c72';
-    texto.style.textShadow = '0 1px 2px rgba(255,255,255,0.8), 0 0 8px rgba(255,255,255,0.6)';
+    texto.style.color = '';
+    texto.style.textShadow = '';
   }
 }
 
@@ -209,7 +260,6 @@ function revelarProximoItemAta() {
       atualizarContadorAta();
     }
   } else {
-    // Todos os itens revelados, mostra o "Além disso"
     const extra = document.getElementById('ataExtra');
     if (extra && !extra.classList.contains('revelado')) {
       extra.classList.add('revelado');
@@ -236,14 +286,12 @@ function atualizarContadorAta() {
   }
 }
 
-// Listener do toque no card da ATA
 function configurarAtaTap() {
   const cardAta = document.getElementById('cardAta');
   if (!cardAta) return;
 
   const verso = cardAta.querySelector('.card-ata-verso');
   verso.addEventListener('click', (e) => {
-    // Só revela se o card está virado (verso visível) e é o card ativo
     if (!cardAta.classList.contains('ativo')) return;
     if (!cardAta.classList.contains('flipped')) return;
     e.stopPropagation();
