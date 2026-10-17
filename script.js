@@ -155,4 +155,147 @@ function atualizarProgresso() {
 function atualizarBarraTitulo() {
   const total = totalCards + 1;
   const progresso = ((indiceAtual + 1) / total) * 100;
-  document.getElementById('barraPreench
+  document.getElementById('barraPreenchimento').style.width = progresso + '%';
+
+  const texto = document.getElementById('barraTexto');
+  if (!finalMostrado) {
+    texto.textContent = 'PONTOS DE ATENÇÃO';
+    texto.style.color = '#1e3c72';
+    texto.style.textShadow = '0 1px 2px rgba(255,255,255,0.8), 0 0 8px rgba(255,255,255,0.6)';
+  }
+}
+
+// ===== INDICADOR =====
+function criarIndicador() {
+  const indicador = document.getElementById('indicador');
+  indicador.innerHTML = '';
+  todosCards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot';
+    dot.setAttribute('aria-label', `Ir para card ${i + 1}`);
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mostrarCard(i);
+    });
+    indicador.appendChild(dot);
+  });
+}
+
+function atualizarIndicador() {
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('ativo', i === indiceAtual && !finalMostrado);
+    dot.classList.toggle('visitado', visitados.has(i) && (i !== indiceAtual || finalMostrado));
+  });
+}
+
+// ===== CARD ATA — revelação progressiva =====
+function resetarAta() {
+  ataRevelados = 0;
+  document.querySelectorAll('.ata-item').forEach(item => {
+    item.classList.remove('revelado');
+  });
+  const extra = document.getElementById('ataExtra');
+  if (extra) extra.classList.remove('revelado');
+  atualizarContadorAta();
+}
+
+function revelarProximoItemAta() {
+  if (ataRevelados < ataTotalItens) {
+    const item = document.querySelector(`.ata-item[data-item="${ataRevelados}"]`);
+    if (item) {
+      item.classList.add('revelado');
+      ataRevelados++;
+      atualizarContadorAta();
+    }
+  } else {
+    // Todos os itens revelados, mostra o "Além disso"
+    const extra = document.getElementById('ataExtra');
+    if (extra && !extra.classList.contains('revelado')) {
+      extra.classList.add('revelado');
+      atualizarContadorAta();
+    }
+  }
+}
+
+function atualizarContadorAta() {
+  const contador = document.getElementById('ataContador');
+  if (!contador) return;
+  const extra = document.getElementById('ataExtra');
+  const extraRevelado = extra && extra.classList.contains('revelado');
+
+  if (ataRevelados < ataTotalItens) {
+    contador.textContent = `Toque para revelar · ${ataRevelados}/${ataTotalItens}`;
+    contador.classList.remove('completo');
+  } else if (!extraRevelado) {
+    contador.textContent = `Toque para finalizar · ${ataRevelados}/${ataTotalItens}`;
+    contador.classList.remove('completo');
+  } else {
+    contador.textContent = `✓ Completo · ${ataRevelados}/${ataTotalItens}`;
+    contador.classList.add('completo');
+  }
+}
+
+// Listener do toque no card da ATA
+function configurarAtaTap() {
+  const cardAta = document.getElementById('cardAta');
+  if (!cardAta) return;
+
+  const verso = cardAta.querySelector('.card-ata-verso');
+  verso.addEventListener('click', (e) => {
+    // Só revela se o card está virado (verso visível) e é o card ativo
+    if (!cardAta.classList.contains('ativo')) return;
+    if (!cardAta.classList.contains('flipped')) return;
+    e.stopPropagation();
+    revelarProximoItemAta();
+  });
+}
+
+// ===== TECLADO =====
+function configurarTeclado() {
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') proximoCard();
+    if (e.key === 'ArrowLeft') cardAnterior();
+    if (e.key === ' ') {
+      e.preventDefault();
+      const ativo = document.querySelector('.card.ativo');
+      if (ativo && !ativo.classList.contains('card-final')) virarCard(ativo);
+    }
+  });
+}
+
+// ===== FIM =====
+function verificarFim() {
+  const ultimo = todosCards[totalCards - 1];
+
+  if (ultimo.classList.contains('flipped') && visitados.size === totalCards) {
+    if (timerCardFinal) clearTimeout(timerCardFinal);
+
+    timerCardFinal = setTimeout(() => {
+      if (indiceAtual === totalCards - 1 &&
+          todosCards[totalCards - 1].classList.contains('flipped') &&
+          !finalMostrado) {
+        mostrarCardFinal();
+      }
+      timerCardFinal = null;
+    }, 10000);
+  }
+}
+
+function voltarAoInicio() {
+  if (timerCardFinal) {
+    clearTimeout(timerCardFinal);
+    timerCardFinal = null;
+  }
+  visitados.clear();
+  finalMostrado = false;
+  cardFinal.classList.remove('ativo');
+  resetarAta();
+  mostrarCard(0);
+}
+
+// ===== START =====
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+  configurarAtaTap();
+});
