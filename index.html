@@ -38,7 +38,7 @@
               <div class="intro-emoji">🎯</div>
               <h3>OBJETIVO</h3>
               <p>Este material reúne os principais <strong>pontos de atenção</strong> para a <strong>atuação no Segundo Turno das Eleições 2026</strong>.</p>
-              <p class="intro-destinatario">Destinado a <strong>Presidentes de Seção da 004ª ZE/RJ</strong>.</p>
+              <p class="intro-destinatario">Destinado a <strong>Presidentes de Seção da 004ª Zona Eleitoral do Rio de Janeiro</strong>.</p>
               <p class="intro-dica">Use a seta › para avançar</p>
             </div>
           </div>
@@ -50,7 +50,7 @@
         <div class="card-inner">
           <div class="card-face card-front">
             <div class="icone-card">🗳️</div>
-            <h2>LACRES DA<br>URNA ELETRÔNICA</h2>
+            <h2>URNA<br>ELETRÔNICA</h2>
             <p class="dica">TOQUE PARA VER</p>
           </div>
           <div class="card-face card-back">
@@ -93,7 +93,7 @@
                   <li class="ata-item" data-item="0"><span class="check">✓</span> Assinatura de todos os mesários</li>
                   <li class="ata-item" data-item="1"><span class="check">✓</span> Horário do teste do teclado</li>
                   <li class="ata-item" data-item="2"><span class="check">✓</span> Horário da emissão da zerésima</li>
-                  <li class="ata-item" data-item="3"><span class="check">✓</span> Se houve eleitor acompanhando a emissão da zerésima ou do BU</li>
+                  <li class="ata-item" data-item="3"><span class="check">✓</span> Se houve eleitor acompanhando a emissão da zerésima</li>
                   <li class="ata-item" data-item="4"><span class="check">✓</span> Assinaturas ao pé da ata com o horário de término dos trabalhos</li>
                 </ul>
                 <p class="ata-extra" id="ataExtra"><span class="emoji-extra">😉</span> Além disso, quaisquer outras ocorrências relevantes ao longo do dia</p>
@@ -106,15 +106,20 @@
       </div>
 
       <!-- CARD 4: IMPEDIDOS DE VOTAR -->
-      <div class="card tema-vermelho" data-index="4" onclick="virarCard(this)">
+      <div class="card tema-vermelho" data-index="4" id="cardImpedidos">
         <div class="card-inner">
-          <div class="card-face card-front">
+          <div class="card-face card-front" onclick="virarCard(this.parentElement.parentElement)">
             <div class="icone-card">🚫</div>
             <h2>IMPEDIDOS<br>DE VOTAR</h2>
             <p class="dica">TOQUE PARA VER</p>
           </div>
-          <div class="card-face card-back">
-            <img src="img/impedidos.jpg" alt="Impedidos de Votar" class="card-img-full">
+          <div class="card-face card-back card-impedidos-verso">
+            <div class="impedidos-container" id="impedidosContainer">
+              <img src="img/impedidos1.jpg" alt="Impedidos 1" class="img-impedidos">
+              <img src="img/impedidos2.jpg" alt="Impedidos 2" class="img-impedidos">
+              <img src="img/impedidos3.jpg" alt="Impedidos 3" class="img-impedidos">
+            </div>
+            <div class="impedidos-contador" id="impedidosContador">Toque para revelar · 1/3</div>
           </div>
         </div>
       </div>
@@ -184,7 +189,7 @@
         </div>
       </div>
 
-      <!-- CARD FINAL DE PARABÉNS (Reformulado) -->
+      <!-- CARD FINAL DE PARABÉNS -->
       <div class="card card-final" id="cardFinal" onclick="event.stopPropagation()">
         <div class="card-face card-front">
           
@@ -226,7 +231,6 @@
 
   <div class="indicador" id="indicador"></div>
 
-  <!-- Código do GoatCounter -->
   <script data-goatcounter="https://jamiro.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
 
