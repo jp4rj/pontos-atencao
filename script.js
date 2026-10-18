@@ -30,7 +30,7 @@ const ataTotalItens = 5;
 const indiceCardAta = 3; 
 
 // ===== ESTADO DO CARD IMPEDIDOS =====
-let impedidosRevelados = 1; // Começa com 1 imagem visível
+let impedidosRevelados = 1; // Começa com a imagem 1 visível
 const impedidosTotal = 3;
 const indiceCardImpedidos = 4;
 
@@ -149,16 +149,11 @@ function proximoCard() {
 
   const cardAtual = todosCards[indiceAtual];
   
-  // Regra específica para o card da ATA
   if (indiceAtual === indiceCardAta) {
     if (ataRevelados < ataTotalItens) return; 
-  } 
-  // Regra específica para o card de Impedidos
-  else if (indiceAtual === indiceCardImpedidos) {
+  } else if (indiceAtual === indiceCardImpedidos) {
     if (impedidosRevelados < impedidosTotal) return;
-  }
-  // Regra geral para os outros
-  else {
+  } else {
     if (!cardAtual.classList.contains('flipped')) return;
   }
 
@@ -338,28 +333,36 @@ function configurarAtaTap() {
   });
 }
 
-// ===== CARD IMPEDIDOS — revelação progressiva de imagens =====
+// ===== CARD IMPEDIDOS — revelação progressiva (SCROLL) =====
 function resetarImpedidos() {
-  impedidosRevelados = 1; // A primeira imagem já aparece ao virar
-  const imgs = document.querySelectorAll('.img-impedidos');
-  imgs.forEach((img, i) => {
-    if (i > 0) img.classList.remove('revelado');
-  });
+  impedidosRevelados = 1;
+  const container = document.getElementById('impedidosContainer');
+  if (container) {
+    // Reseta para a primeira imagem (topo)
+    container.scrollTo({ top: 0, behavior: 'auto' });
+  }
   atualizarContadorImpedidos();
   atualizarBotoes();
 }
 
 function revelarProximaImagemImpedidos() {
   if (impedidosRevelados < impedidosTotal) {
-    const imgs = document.querySelectorAll('.img-impedidos');
-    // O índice da imagem a ser revelada é o próprio número de revelados
-    const img = imgs[impedidosRevelados]; 
-    if (img) {
-      img.classList.add('revelado');
-      impedidosRevelados++;
-      atualizarContadorImpedidos();
-      atualizarBotoes();
+    impedidosRevelados++;
+    
+    const container = document.getElementById('impedidosContainer');
+    if (container) {
+      // Calcula a altura de uma imagem (a altura total dividida por 3)
+      const alturaImagem = container.clientHeight;
+      
+      // Desliza o container para baixo
+      container.scrollTo({
+        top: alturaImagem * (impedidosRevelados - 1),
+        behavior: 'smooth'
+      });
     }
+    
+    atualizarContadorImpedidos();
+    atualizarBotoes();
   }
 }
 
@@ -373,6 +376,10 @@ function atualizarContadorImpedidos() {
   } else {
     contador.textContent = `✓ Completo · ${impedidosRevelados}/${impedidosTotal}`;
     contador.classList.add('completo');
+    // Esconde o contador após completar, para não cobrir a última imagem
+    setTimeout(() => {
+      contador.style.opacity = '0';
+    }, 2000);
   }
 }
 
