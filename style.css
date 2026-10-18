@@ -505,6 +505,68 @@ body.escuro .ata-carimbo {
   border-top-color: rgba(248, 113, 113, 0.4);
 }
 
+/* ===== VERSO DO CARD IMPEDIDOS (IMAGENS) ===== */
+.card-impedidos-verso {
+  position: relative;
+  padding: 0;
+  background: var(--bg-card-branco);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.impedidos-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.img-impedidos {
+  width: 100%;
+  height: 33.333%;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* A primeira imagem já nasce visível */
+.img-impedidos:first-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.img-impedidos.revelado {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.impedidos-contador {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.impedidos-contador.completo {
+  background: #047857;
+  opacity: 0;
+}
+
 /* ===== BARRA DE NAVEGAÇÃO ===== */
 .barra-nav {
   display: flex;
@@ -612,7 +674,7 @@ body.escuro .dot.visitado { background: #34d399; }
   50%      { box-shadow: 0 0 0 6px rgba(30, 60, 114, 0); }
 }
 
-/* ===== CARD FINAL DE PARABÉNS (NOVO DESIGN) ===== */
+/* ===== CARD FINAL DE PARABÉNS ===== */
 .card-final .card-front {
   background: linear-gradient(135deg, #047857, #10b981, #34d399);
   padding: 24px 20px;
@@ -622,7 +684,6 @@ body.escuro .dot.visitado { background: #34d399; }
   overflow-y: auto;
 }
 
-/* Título e Emoji na mesma linha */
 .final-topo {
   display: flex;
   align-items: center;
@@ -652,9 +713,8 @@ body.escuro .dot.visitado { background: #34d399; }
   line-height: 1.3;
 }
 
-/* Caixa do código - Contraste escuro */
 .codigo-box {
-  background: #064e3b; /* Verde muito escuro */
+  background: #064e3b; 
   border: 2px dashed #34d399;
   border-radius: 14px;
   padding: 12px 18px;
@@ -668,7 +728,7 @@ body.escuro .dot.visitado { background: #34d399; }
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 1.2px;
-  color: #a7f3d0; /* Verde claro */
+  color: #a7f3d0; 
   margin-bottom: 6px;
   text-transform: uppercase;
 }
@@ -681,7 +741,6 @@ body.escuro .dot.visitado { background: #34d399; }
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Botão WhatsApp */
 .btn-whatsapp {
   display: flex;
   align-items: center;
@@ -711,12 +770,11 @@ body.escuro .dot.visitado { background: #34d399; }
 
 .whatsapp-icon { width: 20px; height: 20px; }
 
-/* Aviso do WhatsApp - Mais conciso e escuro para contraste */
 .aviso-whatsapp {
   font-size: 0.75rem;
   line-height: 1.3;
-  color: #064e3b; /* Texto escuro */
-  background: rgba(255, 255, 255, 0.85); /* Fundo claro */
+  color: #064e3b; 
+  background: rgba(255, 255, 255, 0.85); 
   padding: 4px 12px;
   border-radius: 12px;
   text-align: center;
@@ -725,7 +783,6 @@ body.escuro .dot.visitado { background: #34d399; }
   font-weight: 600;
 }
 
-/* Botão Recomeçar */
 .btn-recomecar {
   padding: 10px 28px;
   border: 2px solid #fff;
@@ -767,8 +824,6 @@ body.escuro .dot.visitado { background: #34d399; }
   .carrossel { max-width: 620px; padding: 0 20px; }
   .nav-btn { width: 66px; height: 66px; font-size: 2.5rem; }
   .progresso { font-size: 1.15rem; padding: 14px 26px; }
-  
-  /* Ajustes desktop card final */
   .card-final .card-front { padding: 30px 24px; }
   .final-topo h2 { font-size: 2.2rem; }
   .card-final .emoji-final { font-size: 2.8rem; }
