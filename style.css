@@ -61,13 +61,8 @@ body {
   line-height: 1;
 }
 
-.btn-modo:hover {
-  transform: scale(1.1) rotate(15deg);
-}
-
-.btn-modo:active {
-  transform: scale(0.95);
-}
+.btn-modo:hover { transform: scale(1.1) rotate(15deg); }
+.btn-modo:active { transform: scale(0.95); }
 
 /* ===== BARRA DE PROGRESSO COM TÍTULO ===== */
 .barra-titulo {
@@ -280,14 +275,9 @@ body.escuro .card-intro-verso {
   color: #1e3c72;
 }
 
-body.escuro .intro-conteudo {
-  color: #e2e8f0;
-}
+body.escuro .intro-conteudo { color: #e2e8f0; }
 
-.intro-emoji {
-  font-size: 3.2rem;
-  margin-bottom: 16px;
-}
+.intro-emoji { font-size: 3.2rem; margin-bottom: 16px; }
 
 .intro-conteudo h3 {
   font-size: 1.5rem;
@@ -296,9 +286,7 @@ body.escuro .intro-conteudo {
   color: #b91c1c;
 }
 
-body.escuro .intro-conteudo h3 {
-  color: #f87171;
-}
+body.escuro .intro-conteudo h3 { color: #f87171; }
 
 .intro-conteudo p {
   font-size: 1.05rem;
@@ -307,17 +295,10 @@ body.escuro .intro-conteudo h3 {
   color: #333;
 }
 
-body.escuro .intro-conteudo p {
-  color: #cbd5e1;
-}
+body.escuro .intro-conteudo p { color: #cbd5e1; }
 
-.intro-conteudo strong {
-  color: #b91c1c;
-}
-
-body.escuro .intro-conteudo strong {
-  color: #f87171;
-}
+.intro-conteudo strong { color: #b91c1c; }
+body.escuro .intro-conteudo strong { color: #f87171; }
 
 .intro-destinatario {
   background: rgba(185, 28, 28, 0.08);
@@ -339,9 +320,7 @@ body.escuro .intro-destinatario {
   font-size: 0.95rem !important;
 }
 
-body.escuro .intro-dica {
-  color: #94a3b8 !important;
-}
+body.escuro .intro-dica { color: #94a3b8 !important; }
 
 /* ===== VERSO DO CARD ATA DE SEÇÃO ===== */
 .card-ata-verso {
@@ -350,9 +329,7 @@ body.escuro .intro-dica {
   cursor: pointer;
 }
 
-body.escuro .card-ata-verso {
-  background: #2a2419;
-}
+body.escuro .card-ata-verso { background: #2a2419; }
 
 .ata-papel {
   position: relative;
@@ -413,9 +390,7 @@ body.escuro .ata-papel {
   font-weight: normal;
 }
 
-body.escuro .ata-titulo {
-  color: #e2e8f0;
-}
+body.escuro .ata-titulo { color: #e2e8f0; }
 
 .ata-destaque {
   color: #b91c1c;
@@ -424,15 +399,9 @@ body.escuro .ata-titulo {
   letter-spacing: 0.5px;
 }
 
-body.escuro .ata-destaque {
-  color: #f87171;
-}
+body.escuro .ata-destaque { color: #f87171; }
 
-.ata-lista {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 12px 0;
-}
+.ata-lista { list-style: none; padding: 0; margin: 0 0 12px 0; }
 
 .ata-item {
   position: relative;
@@ -448,9 +417,7 @@ body.escuro .ata-destaque {
   transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease, padding 0.3s ease;
 }
 
-body.escuro .ata-item {
-  color: #e2e8f0;
-}
+body.escuro .ata-item { color: #e2e8f0; }
 
 .ata-item.revelado {
   opacity: 1;
@@ -468,9 +435,7 @@ body.escuro .ata-item {
   font-size: 1.05rem;
 }
 
-body.escuro .check {
-  color: #34d399;
-}
+body.escuro .check { color: #34d399; }
 
 .ata-extra {
   font-size: 0.92rem;
@@ -500,10 +465,7 @@ body.escuro .ata-extra {
   max-height: 120px;
 }
 
-.emoji-extra {
-  font-size: 1.15rem;
-  margin-right: 4px;
-}
+.emoji-extra { font-size: 1.15rem; margin-right: 4px; }
 
 .ata-contador {
   text-align: center;
@@ -514,9 +476,7 @@ body.escuro .ata-extra {
   letter-spacing: 0.5px;
 }
 
-body.escuro .ata-contador {
-  color: #94a3b8;
-}
+body.escuro .ata-contador { color: #94a3b8; }
 
 .ata-contador.completo {
   color: #047857;
@@ -524,9 +484,7 @@ body.escuro .ata-contador {
   font-style: normal;
 }
 
-body.escuro .ata-contador.completo {
-  color: #34d399;
-}
+body.escuro .ata-contador.completo { color: #34d399; }
 
 .ata-carimbo {
   margin-top: auto;
@@ -596,9 +554,7 @@ body.escuro .ata-carimbo {
   transform: none;
 }
 
-body.escuro .nav-btn:disabled {
-  background: #475569;
-}
+body.escuro .nav-btn:disabled { background: #475569; }
 
 /* ===== PROGRESSO (X de Y) ===== */
 .progresso {
@@ -637,9 +593,7 @@ body.escuro .nav-btn:disabled {
   padding: 0;
 }
 
-body.escuro .dot {
-  background: #475569;
-}
+body.escuro .dot { background: #475569; }
 
 .dot.ativo {
   background: #1e3c72;
@@ -648,75 +602,83 @@ body.escuro .dot {
   animation: pulsarDot 1.5s ease-in-out infinite;
 }
 
-body.escuro .dot.ativo {
-  background: #60a5fa;
-}
+body.escuro .dot.ativo { background: #60a5fa; }
 
-.dot.visitado {
-  background: #11998e;
-}
-
-body.escuro .dot.visitado {
-  background: #34d399;
-}
+.dot.visitado { background: #11998e; }
+body.escuro .dot.visitado { background: #34d399; }
 
 @keyframes pulsarDot {
   0%, 100% { box-shadow: 0 0 0 0 rgba(30, 60, 114, 0.5); }
   50%      { box-shadow: 0 0 0 6px rgba(30, 60, 114, 0); }
 }
 
-/* ===== CARD FINAL DE PARABÉNS ===== */
+/* ===== CARD FINAL DE PARABÉNS (NOVO DESIGN) ===== */
 .card-final .card-front {
   background: linear-gradient(135deg, #047857, #10b981, #34d399);
-  padding: 20px 20px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   overflow-y: auto;
 }
 
-.card-final .emoji-final {
-  font-size: 3rem;
+/* Título e Emoji na mesma linha */
+.final-topo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   margin-bottom: 8px;
+  width: 100%;
+}
+
+.final-topo h2 {
+  font-size: 1.8rem;
+  margin: 0;
+  letter-spacing: 1.5px;
+  color: #fff;
+}
+
+.card-final .emoji-final {
+  font-size: 2.2rem;
   animation: pulse 1.5s ease-in-out infinite;
 }
 
-.card-final h2 {
-  font-size: 1.6rem;
-  margin-bottom: 6px;
-  letter-spacing: 1.5px;
-}
-
 .card-final .mensagem-final {
-  font-size: 0.95rem;
+  font-size: 1rem;
+  color: #fff;
   opacity: 0.95;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   line-height: 1.3;
 }
 
-/* Caixa do código */
+/* Caixa do código - Contraste escuro */
 .codigo-box {
-  background: rgba(255, 255, 255, 0.18);
-  border: 2px dashed rgba(255, 255, 255, 0.5);
+  background: #064e3b; /* Verde muito escuro */
+  border: 2px dashed #34d399;
   border-radius: 14px;
   padding: 12px 18px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   width: 100%;
   max-width: 260px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .codigo-label {
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 1.2px;
-  opacity: 0.9;
+  color: #a7f3d0; /* Verde claro */
   margin-bottom: 6px;
   text-transform: uppercase;
 }
 
 .codigo-valor {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 900;
   letter-spacing: 2px;
   color: #fff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Botão WhatsApp */
@@ -736,7 +698,7 @@ body.escuro .dot.visitado {
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
   transition: all 0.25s;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   width: 100%;
   max-width: 260px;
 }
@@ -747,20 +709,20 @@ body.escuro .dot.visitado {
   transform: scale(1.04);
 }
 
-.whatsapp-icon {
-  width: 20px;
-  height: 20px;
-}
+.whatsapp-icon { width: 20px; height: 20px; }
 
-/* Aviso do WhatsApp */
+/* Aviso do WhatsApp - Mais conciso e escuro para contraste */
 .aviso-whatsapp {
-  font-size: 0.72rem;
-  line-height: 1.35;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: #064e3b; /* Texto escuro */
+  background: rgba(255, 255, 255, 0.85); /* Fundo claro */
+  padding: 4px 12px;
+  border-radius: 12px;
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   max-width: 240px;
-  font-style: italic;
+  font-weight: 600;
 }
 
 /* Botão Recomeçar */
@@ -805,10 +767,13 @@ body.escuro .dot.visitado {
   .carrossel { max-width: 620px; padding: 0 20px; }
   .nav-btn { width: 66px; height: 66px; font-size: 2.5rem; }
   .progresso { font-size: 1.15rem; padding: 14px 26px; }
-  .card-final .emoji-final { font-size: 3.5rem; }
-  .card-final h2 { font-size: 2rem; }
-  .codigo-valor { font-size: 1.8rem; }
-  .btn-whatsapp { font-size: 1rem; padding: 14px 28px; }
-  .btn-recomecar { font-size: 1rem; padding: 12px 32px; }
+  
+  /* Ajustes desktop card final */
+  .card-final .card-front { padding: 30px 24px; }
+  .final-topo h2 { font-size: 2.2rem; }
+  .card-final .emoji-final { font-size: 2.8rem; }
+  .codigo-valor { font-size: 1.9rem; }
+  .btn-whatsapp { font-size: 1.05rem; padding: 14px 28px; }
   .aviso-whatsapp { font-size: 0.85rem; max-width: 280px; }
+  .btn-recomecar { font-size: 1.05rem; padding: 12px 32px; }
 }
