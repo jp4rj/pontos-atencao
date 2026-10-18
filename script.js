@@ -22,11 +22,12 @@ const visitados = new Set();
 let finalMostrado = false;
 let timerCardFinal = null;
 let codigoAtual = "";
+const somFlip = document.getElementById('somFlip');
 
 // ===== ESTADO DO CARD ATA =====
 let ataRevelados = 0;
 const ataTotalItens = 5;
-const indiceCardAta = 3; // O card da ATA é o data-index 3
+const indiceCardAta = 3; 
 
 // ===== MODO ESCURO =====
 function initModo() {
@@ -47,6 +48,18 @@ function alternarModo() {
   } else {
     localStorage.setItem('modo', 'claro');
     icone.textContent = '🌙';
+  }
+}
+
+// ===== SONS =====
+function tocarSomCarta() {
+  if (somFlip) {
+    somFlip.currentTime = 0; // Reinicia o som se já estiver tocando
+    somFlip.play().catch(e => {
+      // O navegador pode bloquear o áudio na primeira interação (política de autoplay).
+      // Como o som toca ao clicar, geralmente funciona, mas o catch evita erros no console.
+      console.log("Áudio bloqueado pelo navegador até interação.");
+    });
   }
 }
 
@@ -115,6 +128,9 @@ function virarCard(card) {
   const video = card.querySelector('video');
   card.classList.toggle('flipped');
 
+  // Toca o som
+  tocarSomCarta();
+
   if (video && !card.classList.contains('flipped')) {
     video.pause();
     video.currentTime = 0;
@@ -130,11 +146,9 @@ function proximoCard() {
 
   const cardAtual = todosCards[indiceAtual];
   
-  // Validação: no card da ATA, exige todos os 5 itens revelados
   if (indiceAtual === indiceCardAta) {
-    if (ataRevelados < ataTotalItens) return; // Bloqueia se não revelou tudo
+    if (ataRevelados < ataTotalItens) return; 
   } else {
-    // Nos outros cards, exige que o card esteja virado
     if (!cardAtual.classList.contains('flipped')) return;
   }
 
@@ -196,7 +210,6 @@ function atualizarBotoes() {
   const cardAtual = todosCards[indiceAtual];
   const foiVirado = cardAtual.classList.contains('flipped');
   
-  // Regra especial para o card da ATA
   let podeAvancar = false;
   if (indiceAtual === indiceCardAta) {
     podeAvancar = (ataRevelados >= ataTotalItens);
@@ -271,7 +284,7 @@ function revelarProximoItemAta() {
       item.classList.add('revelado');
       ataRevelados++;
       atualizarContadorAta();
-      atualizarBotoes(); // Atualiza a seta de avançar
+      atualizarBotoes();
     }
   } else {
     const extra = document.getElementById('ataExtra');
