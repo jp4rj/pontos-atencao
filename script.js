@@ -29,6 +29,11 @@ let ataRevelados = 0;
 const ataTotalItens = 5;
 const indiceCardAta = 3; 
 
+// ===== ESTADO DO CARD IMPEDIDOS =====
+let impedidosRevelados = 1; // Começa com 1 imagem visível
+const impedidosTotal = 3;
+const indiceCardImpedidos = 4;
+
 // ===== MODO ESCURO =====
 function initModo() {
   const modoSalvo = localStorage.getItem('modo');
@@ -54,10 +59,8 @@ function alternarModo() {
 // ===== SONS =====
 function tocarSomCarta() {
   if (somFlip) {
-    somFlip.currentTime = 0; // Reinicia o som se já estiver tocando
+    somFlip.currentTime = 0; 
     somFlip.play().catch(e => {
-      // O navegador pode bloquear o áudio na primeira interação (política de autoplay).
-      // Como o som toca ao clicar, geralmente funciona, mas o catch evita erros no console.
       console.log("Áudio bloqueado pelo navegador até interação.");
     });
   }
@@ -84,6 +87,7 @@ function init() {
   configurarTeclado();
   atualizarProgresso();
   resetarAta();
+  resetarImpedidos();
 }
 
 // ===== MOSTRAR CARD =====
@@ -128,7 +132,6 @@ function virarCard(card) {
   const video = card.querySelector('video');
   card.classList.toggle('flipped');
 
-  // Toca o som
   tocarSomCarta();
 
   if (video && !card.classList.contains('flipped')) {
@@ -146,9 +149,16 @@ function proximoCard() {
 
   const cardAtual = todosCards[indiceAtual];
   
+  // Regra específica para o card da ATA
   if (indiceAtual === indiceCardAta) {
     if (ataRevelados < ataTotalItens) return; 
-  } else {
+  } 
+  // Regra específica para o card de Impedidos
+  else if (indiceAtual === indiceCardImpedidos) {
+    if (impedidosRevelados < impedidosTotal) return;
+  }
+  // Regra geral para os outros
+  else {
     if (!cardAtual.classList.contains('flipped')) return;
   }
 
@@ -213,6 +223,8 @@ function atualizarBotoes() {
   let podeAvancar = false;
   if (indiceAtual === indiceCardAta) {
     podeAvancar = (ataRevelados >= ataTotalItens);
+  } else if (indiceAtual === indiceCardImpedidos) {
+    podeAvancar = (impedidosRevelados >= impedidosTotal);
   } else {
     podeAvancar = foiVirado;
   }
@@ -326,6 +338,57 @@ function configurarAtaTap() {
   });
 }
 
+// ===== CARD IMPEDIDOS — revelação progressiva de imagens =====
+function resetarImpedidos() {
+  impedidosRevelados = 1; // A primeira imagem já aparece ao virar
+  const imgs = document.querySelectorAll('.img-impedidos');
+  imgs.forEach((img, i) => {
+    if (i > 0) img.classList.remove('revelado');
+  });
+  atualizarContadorImpedidos();
+  atualizarBotoes();
+}
+
+function revelarProximaImagemImpedidos() {
+  if (impedidosRevelados < impedidosTotal) {
+    const imgs = document.querySelectorAll('.img-impedidos');
+    // O índice da imagem a ser revelada é o próprio número de revelados
+    const img = imgs[impedidosRevelados]; 
+    if (img) {
+      img.classList.add('revelado');
+      impedidosRevelados++;
+      atualizarContadorImpedidos();
+      atualizarBotoes();
+    }
+  }
+}
+
+function atualizarContadorImpedidos() {
+  const contador = document.getElementById('impedidosContador');
+  if (!contador) return;
+
+  if (impedidosRevelados < impedidosTotal) {
+    contador.textContent = `Toque para ver mais · ${impedidosRevelados}/${impedidosTotal}`;
+    contador.classList.remove('completo');
+  } else {
+    contador.textContent = `✓ Completo · ${impedidosRevelados}/${impedidosTotal}`;
+    contador.classList.add('completo');
+  }
+}
+
+function configurarImpedidosTap() {
+  const cardImpedidos = document.getElementById('cardImpedidos');
+  if (!cardImpedidos) return;
+
+  const verso = cardImpedidos.querySelector('.card-impedidos-verso');
+  verso.addEventListener('click', (e) => {
+    if (!cardImpedidos.classList.contains('ativo')) return;
+    if (!cardImpedidos.classList.contains('flipped')) return;
+    e.stopPropagation();
+    revelarProximaImagemImpedidos();
+  });
+}
+
 // ===== TECLADO =====
 function configurarTeclado() {
   document.addEventListener('keydown', (e) => {
@@ -366,6 +429,7 @@ function voltarAoInicio() {
   finalMostrado = false;
   cardFinal.classList.remove('ativo');
   resetarAta();
+  resetarImpedidos();
   mostrarCard(0);
 }
 
@@ -373,4 +437,5 @@ function voltarAoInicio() {
 document.addEventListener('DOMContentLoaded', () => {
   init();
   configurarAtaTap();
+  configurarImpedidosTap();
 });
