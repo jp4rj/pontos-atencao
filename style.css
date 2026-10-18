@@ -505,48 +505,43 @@ body.escuro .ata-carimbo {
   border-top-color: rgba(248, 113, 113, 0.4);
 }
 
-/* ===== VERSO DO CARD IMPEDIDOS (IMAGENS) ===== */
+/* ===== VERSO DO CARD IMPEDIDOS (CORRIGIDO) ===== */
 .card-impedidos-verso {
   position: relative;
   padding: 0;
-  background: var(--bg-card-branco);
+  background: #000;
   cursor: pointer;
   display: flex;
   flex-direction: column;
 }
 
-.impedidos-container {
+.impedidos-scroll {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  /* Esconde a barra de rolagem para ficar limpo */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.impedidos-scroll::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .img-impedidos {
   width: 100%;
-  height: 33.333%;
+  height: 100%; /* Cada imagem ocupa 100% da altura da janela */
   object-fit: cover;
-  display: block;
   flex-shrink: 0;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-/* A primeira imagem já nasce visível */
-.img-impedidos:first-child {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.img-impedidos.revelado {
-  opacity: 1;
-  transform: translateY(0);
+  scroll-snap-align: start; /* O ímã de rolagem para cada imagem */
 }
 
 .impedidos-contador {
   position: absolute;
-  bottom: 10px;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.65);
