@@ -8,6 +8,9 @@
 </head>
 <body>
 
+  <!-- SOM DE VIRAR CARTA -->
+  <audio id="somFlip" src="flip.mp3" preload="auto"></audio>
+
   <!-- BOTÃO MODO ESCURO -->
   <button class="btn-modo" id="btnModo" onclick="alternarModo()" aria-label="Alternar modo escuro">
     <span id="iconeModo">🌙</span>
@@ -181,15 +184,19 @@
         </div>
       </div>
 
-      <!-- CARD FINAL DE PARABÉNS -->
+      <!-- CARD FINAL DE PARABÉNS (Reformulado) -->
       <div class="card card-final" id="cardFinal" onclick="event.stopPropagation()">
         <div class="card-face card-front">
-          <div class="emoji-final">🎉</div>
-          <h2>PARABÉNS!</h2>
+          
+          <div class="final-topo">
+            <h2>PARABÉNS!</h2>
+            <div class="emoji-final">🎉</div>
+          </div>
+          
           <p class="mensagem-final">Você viu todos os cards.</p>
 
           <div class="codigo-box">
-            <p class="codigo-label">SEU CÓDIGO DE CONCLUSÃO</p>
+            <p class="codigo-label">CÓDIGO DE CONCLUSÃO</p>
             <div class="codigo-valor" id="codigoValor">—</div>
           </div>
 
@@ -200,7 +207,7 @@
             Enviar no WhatsApp
           </button>
 
-          <p class="aviso-whatsapp">Envie para nosso WhatsApp apenas se essa comunicação direta fizer sentido para você 😉</p>
+          <p class="aviso-whatsapp">Envie apenas se essa comunicação fizer sentido 😉</p>
 
           <button class="btn-recomecar" onclick="voltarAoInicio()">Recomeçar</button>
         </div>
