@@ -1,16 +1,7 @@
 // ===== CONFIGURAÇÕES =====
 const WHATSAPP_NUMERO = "5521986233071";
 const CODIGOS = [
-  "URNA",
-  "DEMOCRACIA",
-  "CIDADANIA",
-  "VOTO",
-  "MESARIO",
-  "ELEICAO",
-  "ZERESIMA",
-  "BOLETIM",
-  "SECAO",
-  "SEGUNDO-TURNO"
+  "URNA", "DEMOCRACIA", "CIDADANIA", "VOTO", "MESARIO", "ELEICAO", "ZERESIMA", "BOLETIM", "SECAO", "SEGUNDO-TURNO"
 ];
 
 // ===== ESTADO =====
@@ -55,9 +46,7 @@ function alternarModo() {
 function tocarSomCarta() {
   if (somFlip) {
     somFlip.currentTime = 0; 
-    somFlip.play().catch(e => {
-      console.log("Áudio bloqueado pelo navegador até interação.");
-    });
+    somFlip.play().catch(e => { console.log("Áudio bloqueado."); });
   }
 }
 
@@ -88,20 +77,14 @@ function init() {
 function mostrarCard(novoIndice) {
   if (novoIndice < 0 || novoIndice >= totalCards) return;
 
-  if (timerCardFinal) {
-    clearTimeout(timerCardFinal);
-    timerCardFinal = null;
-  }
+  if (timerCardFinal) { clearTimeout(timerCardFinal); timerCardFinal = null; }
 
   finalMostrado = false;
   cardFinal.classList.remove('ativo');
 
   const cardSaindo = todosCards[indiceAtual];
   const videoSaindo = cardSaindo.querySelector('video');
-  if (videoSaindo) {
-    videoSaindo.pause();
-    videoSaindo.currentTime = 0;
-  }
+  if (videoSaindo) { videoSaindo.pause(); videoSaindo.currentTime = 0; }
 
   todosCards.forEach(c => c.classList.remove('ativo'));
 
@@ -128,10 +111,7 @@ function virarCard(card) {
 
   tocarSomCarta();
 
-  if (video && !card.classList.contains('flipped')) {
-    video.pause();
-    video.currentTime = 0;
-  }
+  if (video && !card.classList.contains('flipped')) { video.pause(); video.currentTime = 0; }
 
   atualizarBotoes();
   verificarFim();
@@ -149,32 +129,18 @@ function proximoCard() {
     if (!cardAtual.classList.contains('flipped')) return;
   }
 
-  if (indiceAtual === totalCards - 1) {
-    mostrarCardFinal();
-    return;
-  }
-  
-  if (indiceAtual < totalCards - 1) {
-    mostrarCard(indiceAtual + 1);
-  }
+  if (indiceAtual === totalCards - 1) { mostrarCardFinal(); return; }
+  if (indiceAtual < totalCards - 1) { mostrarCard(indiceAtual + 1); }
 }
 
 function cardAnterior() {
-  if (finalMostrado) {
-    mostrarCard(totalCards - 1);
-    return;
-  }
-  if (indiceAtual > 0) {
-    mostrarCard(indiceAtual - 1);
-  }
+  if (finalMostrado) { mostrarCard(totalCards - 1); return; }
+  if (indiceAtual > 0) { mostrarCard(indiceAtual - 1); }
 }
 
 // ===== CARD FINAL =====
 function mostrarCardFinal() {
-  if (timerCardFinal) {
-    clearTimeout(timerCardFinal);
-    timerCardFinal = null;
-  }
+  if (timerCardFinal) { clearTimeout(timerCardFinal); timerCardFinal = null; }
 
   finalMostrado = true;
   todosCards.forEach(c => c.classList.remove('ativo'));
@@ -182,15 +148,11 @@ function mostrarCardFinal() {
 
   document.getElementById('btnNext').disabled = true;
   document.getElementById('btnPrev').disabled = false;
-
   document.getElementById('posAtual').textContent = '✓';
   document.getElementById('posTotal').textContent = totalCards;
 
   const dots = document.querySelectorAll('.dot');
-  dots.forEach(dot => {
-    dot.classList.remove('ativo');
-    dot.classList.add('visitado');
-  });
+  dots.forEach(dot => { dot.classList.remove('ativo'); dot.classList.add('visitado'); });
 
   const barra = document.getElementById('barraPreenchimento');
   const texto = document.getElementById('barraTexto');
@@ -246,10 +208,7 @@ function criarIndicador() {
     const dot = document.createElement('button');
     dot.className = 'dot';
     dot.setAttribute('aria-label', `Ir para card ${i + 1}`);
-    dot.addEventListener('click', (e) => {
-      e.stopPropagation();
-      mostrarCard(i);
-    });
+    dot.addEventListener('click', (e) => { e.stopPropagation(); mostrarCard(i); });
     indicador.appendChild(dot);
   });
 }
@@ -265,9 +224,7 @@ function atualizarIndicador() {
 // ===== CARD ATA — revelação progressiva =====
 function resetarAta() {
   ataRevelados = 0;
-  document.querySelectorAll('.ata-item').forEach(item => {
-    item.classList.remove('revelado');
-  });
+  document.querySelectorAll('.ata-item').forEach(item => { item.classList.remove('revelado'); });
   const extra = document.getElementById('ataExtra');
   if (extra) extra.classList.remove('revelado');
   atualizarContadorAta();
@@ -344,9 +301,7 @@ function verificarFim() {
     if (timerCardFinal) clearTimeout(timerCardFinal);
 
     timerCardFinal = setTimeout(() => {
-      if (indiceAtual === totalCards - 1 &&
-          todosCards[totalCards - 1].classList.contains('flipped') &&
-          !finalMostrado) {
+      if (indiceAtual === totalCards - 1 && todosCards[totalCards - 1].classList.contains('flipped') && !finalMostrado) {
         mostrarCardFinal();
       }
       timerCardFinal = null;
@@ -355,10 +310,7 @@ function verificarFim() {
 }
 
 function voltarAoInicio() {
-  if (timerCardFinal) {
-    clearTimeout(timerCardFinal);
-    timerCardFinal = null;
-  }
+  if (timerCardFinal) { clearTimeout(timerCardFinal); timerCardFinal = null; }
   visitados.clear();
   finalMostrado = false;
   cardFinal.classList.remove('ativo');
