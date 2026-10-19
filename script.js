@@ -143,12 +143,9 @@ function proximoCard() {
 
   const cardAtual = todosCards[indiceAtual];
   
-  // Regra especial para a ATA
   if (indiceAtual === indiceCardAta) {
     if (ataRevelados < ataTotalItens) return; 
-  } 
-  // Regra geral (inclui Impedidos, que agora voltou a ser simples)
-  else {
+  } else {
     if (!cardAtual.classList.contains('flipped')) return;
   }
 
