@@ -105,21 +105,16 @@
         </div>
       </div>
 
-      <!-- CARD 4: IMPEDIDOS DE VOTAR (CORRIGIDO) -->
-      <div class="card tema-vermelho" data-index="4" id="cardImpedidos">
+      <!-- CARD 4: IMPEDIDOS DE VOTAR (IMAGEM ÚNICA) -->
+      <div class="card tema-vermelho" data-index="4" onclick="virarCard(this)">
         <div class="card-inner">
-          <div class="card-face card-front" onclick="virarCard(this.parentElement.parentElement)">
+          <div class="card-face card-front">
             <div class="icone-card">🚫</div>
             <h2>IMPEDIDOS<br>DE VOTAR</h2>
             <p class="dica">TOQUE PARA VER</p>
           </div>
-          <div class="card-face card-back card-impedidos-verso">
-            <div class="impedidos-scroll" id="impedidosContainer">
-              <img src="img/impedidos1.jpg" alt="Impedidos 1" class="img-impedidos">
-              <img src="img/impedidos2.jpg" alt="Impedidos 2" class="img-impedidos">
-              <img src="img/impedidos3.jpg" alt="Impedidos 3" class="img-impedidos">
-            </div>
-            <div class="impedidos-contador" id="impedidosContador">Toque para ver mais · 1/3</div>
+          <div class="card-face card-back">
+            <img src="img/impedidos.jpg" alt="Impedidos de Votar" class="card-img-full">
           </div>
         </div>
       </div>
