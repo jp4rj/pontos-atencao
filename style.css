@@ -325,6 +325,16 @@ body.escuro .card-texto-verso { background: #1e293b; }
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
+/* SVG de equipe */
+.svg-equipe svg {
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+body.escuro .svg-equipe svg circle:first-child {
+  fill: #334155; /* Muda o fundo do círculo no modo escuro */
+}
+
 .texto-destaque {
   font-size: 1.1rem;
   line-height: 1.5;
@@ -660,6 +670,7 @@ body.escuro .dot.visitado { background: #34d399; }
   .intro-conteudo p { font-size: 1.15rem; }
   .subtitulo-card { font-size: 1rem; padding: 16px; }
   .dte-lista li { font-size: 1.1rem; }
+  .svg-equipe svg { width: 120px; height: 120px; }
   .ata-titulo { font-size: 1.25rem; }
   .ata-item { font-size: 1.05rem; }
   .ata-extra { font-size: 1.05rem; }
