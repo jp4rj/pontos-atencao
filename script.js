@@ -29,11 +29,6 @@ let ataRevelados = 0;
 const ataTotalItens = 5;
 const indiceCardAta = 3; 
 
-// ===== ESTADO DO CARD IMPEDIDOS =====
-let impedidosRevelados = 1; // Começa com a imagem 1 visível
-const impedidosTotal = 3;
-const indiceCardImpedidos = 4;
-
 // ===== MODO ESCURO =====
 function initModo() {
   const modoSalvo = localStorage.getItem('modo');
@@ -87,7 +82,6 @@ function init() {
   configurarTeclado();
   atualizarProgresso();
   resetarAta();
-  resetarImpedidos();
 }
 
 // ===== MOSTRAR CARD =====
@@ -149,11 +143,12 @@ function proximoCard() {
 
   const cardAtual = todosCards[indiceAtual];
   
+  // Regra especial para a ATA
   if (indiceAtual === indiceCardAta) {
     if (ataRevelados < ataTotalItens) return; 
-  } else if (indiceAtual === indiceCardImpedidos) {
-    if (impedidosRevelados < impedidosTotal) return;
-  } else {
+  } 
+  // Regra geral (inclui Impedidos, que agora voltou a ser simples)
+  else {
     if (!cardAtual.classList.contains('flipped')) return;
   }
 
@@ -218,8 +213,6 @@ function atualizarBotoes() {
   let podeAvancar = false;
   if (indiceAtual === indiceCardAta) {
     podeAvancar = (ataRevelados >= ataTotalItens);
-  } else if (indiceAtual === indiceCardImpedidos) {
-    podeAvancar = (impedidosRevelados >= impedidosTotal);
   } else {
     podeAvancar = foiVirado;
   }
@@ -333,58 +326,6 @@ function configurarAtaTap() {
   });
 }
 
-// ===== CARD IMPEDIDOS — revelação progressiva =====
-function resetarImpedidos() {
-  impedidosRevelados = 1;
-  document.querySelectorAll('.img-impedidos').forEach((img, i) => {
-    if (i > 0) img.classList.remove('revelado');
-  });
-  atualizarContadorImpedidos();
-  atualizarBotoes();
-}
-
-function revelarProximaImagemImpedidos() {
-  if (impedidosRevelados < impedidosTotal) {
-    const imgs = document.querySelectorAll('.img-impedidos');
-    const img = imgs[impedidosRevelados]; 
-    if (img) {
-      img.classList.add('revelado');
-      impedidosRevelados++;
-      atualizarContadorImpedidos();
-      atualizarBotoes();
-    }
-  }
-}
-
-function atualizarContadorImpedidos() {
-  const contador = document.getElementById('impedidosContador');
-  if (!contador) return;
-
-  if (impedidosRevelados < impedidosTotal) {
-    contador.textContent = `Toque para ver mais · ${impedidosRevelados}/${impedidosTotal}`;
-    contador.classList.remove('completo');
-  } else {
-    contador.textContent = `✓ Completo · ${impedidosRevelados}/${impedidosTotal}`;
-    contador.classList.add('completo');
-    setTimeout(() => {
-      contador.style.opacity = '0';
-    }, 2000);
-  }
-}
-
-function configurarImpedidosTap() {
-  const cardImpedidos = document.getElementById('cardImpedidos');
-  if (!cardImpedidos) return;
-
-  const verso = cardImpedidos.querySelector('.card-impedidos-verso');
-  verso.addEventListener('click', (e) => {
-    if (!cardImpedidos.classList.contains('ativo')) return;
-    if (!cardImpedidos.classList.contains('flipped')) return;
-    e.stopPropagation();
-    revelarProximaImagemImpedidos();
-  });
-}
-
 // ===== TECLADO =====
 function configurarTeclado() {
   document.addEventListener('keydown', (e) => {
@@ -425,7 +366,6 @@ function voltarAoInicio() {
   finalMostrado = false;
   cardFinal.classList.remove('ativo');
   resetarAta();
-  resetarImpedidos();
   mostrarCard(0);
 }
 
@@ -433,5 +373,4 @@ function voltarAoInicio() {
 document.addEventListener('DOMContentLoaded', () => {
   init();
   configurarAtaTap();
-  configurarImpedidosTap();
 });
