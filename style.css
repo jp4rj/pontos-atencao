@@ -270,13 +270,8 @@ body.escuro .card-intro-verso {
   background: linear-gradient(135deg, #3f2a1a, #4a3820);
 }
 
-.intro-conteudo {
-  text-align: center;
-  color: #1e3c72;
-}
-
+.intro-conteudo { text-align: center; color: #1e3c72; }
 body.escuro .intro-conteudo { color: #e2e8f0; }
-
 .intro-emoji { font-size: 3.2rem; margin-bottom: 16px; }
 
 .intro-conteudo h3 {
@@ -287,16 +282,8 @@ body.escuro .intro-conteudo { color: #e2e8f0; }
 }
 
 body.escuro .intro-conteudo h3 { color: #f87171; }
-
-.intro-conteudo p {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  margin-bottom: 16px;
-  color: #333;
-}
-
+.intro-conteudo p { font-size: 1.05rem; line-height: 1.6; margin-bottom: 16px; color: #333; }
 body.escuro .intro-conteudo p { color: #cbd5e1; }
-
 .intro-conteudo strong { color: #b91c1c; }
 body.escuro .intro-conteudo strong { color: #f87171; }
 
@@ -313,230 +300,110 @@ body.escuro .intro-destinatario {
   border-left-color: #f87171;
 }
 
-.intro-dica {
-  margin-top: 20px;
-  font-style: italic;
-  color: #666 !important;
-  font-size: 0.95rem !important;
-}
-
+.intro-dica { margin-top: 20px; font-style: italic; color: #666 !important; font-size: 0.95rem !important; }
 body.escuro .intro-dica { color: #94a3b8 !important; }
 
 /* ===== VERSO DO CARD ATA DE SEÇÃO ===== */
-.card-ata-verso {
-  background: #f5f1e8;
-  padding: 0;
-  cursor: pointer;
-}
-
+.card-ata-verso { background: #f5f1e8; padding: 0; cursor: pointer; }
 body.escuro .card-ata-verso { background: #2a2419; }
 
 .ata-papel {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0px,
-      transparent 27px,
-      #d4c9b0 28px,
-      transparent 29px
-    ),
-    linear-gradient(135deg, #fefcf5, #f5ecd7);
+  position: relative; width: 100%; height: 100%;
+  background: repeating-linear-gradient(to bottom, transparent 0px, transparent 27px, #d4c9b0 28px, transparent 29px), linear-gradient(135deg, #fefcf5, #f5ecd7);
   overflow: hidden;
 }
 
 body.escuro .ata-papel {
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0px,
-      transparent 27px,
-      #5a4a30 28px,
-      transparent 29px
-    ),
-    linear-gradient(135deg, #2a2419, #3a3020);
+  background: repeating-linear-gradient(to bottom, transparent 0px, transparent 27px, #5a4a30 28px, transparent 29px), linear-gradient(135deg, #2a2419, #3a3020);
 }
 
-.ata-margem {
-  position: absolute;
-  top: 0;
-  left: 28px;
-  width: 2px;
-  height: 100%;
-  background: #dc2626;
-  opacity: 0.5;
-  z-index: 1;
-}
+.ata-margem { position: absolute; top: 0; left: 28px; width: 2px; height: 100%; background: #dc2626; opacity: 0.5; z-index: 1; }
 
 .ata-conteudo {
-  position: relative;
-  z-index: 2;
-  padding: 20px 18px 18px 42px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  font-family: Georgia, 'Times New Roman', serif;
-  overflow-y: auto;
+  position: relative; z-index: 2; padding: 20px 18px 18px 42px; height: 100%;
+  display: flex; flex-direction: column; font-family: Georgia, 'Times New Roman', serif; overflow-y: auto;
 }
 
-.ata-titulo {
-  font-size: 1.1rem;
-  color: #1e293b;
-  margin-bottom: 14px;
-  line-height: 1.3;
-  text-align: center;
-  font-weight: normal;
-}
-
+.ata-titulo { font-size: 1.1rem; color: #1e293b; margin-bottom: 14px; line-height: 1.3; text-align: center; font-weight: normal; }
 body.escuro .ata-titulo { color: #e2e8f0; }
 
-.ata-destaque {
-  color: #b91c1c;
-  font-weight: 800;
-  font-size: 1.15rem;
-  letter-spacing: 0.5px;
-}
-
+.ata-destaque { color: #b91c1c; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px; }
 body.escuro .ata-destaque { color: #f87171; }
 
 .ata-lista { list-style: none; padding: 0; margin: 0 0 12px 0; }
 
 .ata-item {
-  position: relative;
-  font-size: 0.92rem;
-  line-height: 1.4;
-  color: #1e293b;
-  padding: 5px 0 5px 24px;
-  font-style: italic;
-  opacity: 0;
-  transform: translateX(-15px);
-  max-height: 0;
-  overflow: hidden;
+  position: relative; font-size: 0.92rem; line-height: 1.4; color: #1e293b; padding: 5px 0 5px 24px; font-style: italic;
+  opacity: 0; transform: translateX(-15px); max-height: 0; overflow: hidden;
   transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease, padding 0.3s ease;
 }
 
 body.escuro .ata-item { color: #e2e8f0; }
-
-.ata-item.revelado {
-  opacity: 1;
-  transform: translateX(0);
-  max-height: 100px;
-}
-
-.check {
-  position: absolute;
-  left: 0;
-  top: 5px;
-  color: #047857;
-  font-weight: 900;
-  font-style: normal;
-  font-size: 1.05rem;
-}
-
+.ata-item.revelado { opacity: 1; transform: translateX(0); max-height: 100px; }
+.check { position: absolute; left: 0; top: 5px; color: #047857; font-weight: 900; font-style: normal; font-size: 1.05rem; }
 body.escuro .check { color: #34d399; }
 
 .ata-extra {
-  font-size: 0.92rem;
-  line-height: 1.45;
-  color: #1e3a8a;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 8px;
-  padding: 8px 6px;
-  background: rgba(30, 58, 138, 0.06);
-  border-radius: 8px;
-  opacity: 0;
-  transform: translateY(10px);
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease, padding 0.3s ease;
+  font-size: 0.92rem; line-height: 1.45; color: #1e3a8a; font-weight: 600; text-align: center; margin-top: 8px; padding: 8px 6px; background: rgba(30, 58, 138, 0.06); border-radius: 8px;
+  opacity: 0; transform: translateY(10px); max-height: 0; overflow: hidden; transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease, padding 0.3s ease;
 }
 
-body.escuro .ata-extra {
-  color: #93c5fd;
-  background: rgba(147, 197, 253, 0.08);
-}
-
-.ata-extra.revelado {
-  opacity: 1;
-  transform: translateY(0);
-  max-height: 120px;
-}
-
+body.escuro .ata-extra { color: #93c5fd; background: rgba(147, 197, 253, 0.08); }
+.ata-extra.revelado { opacity: 1; transform: translateY(0); max-height: 120px; }
 .emoji-extra { font-size: 1.15rem; margin-right: 4px; }
 
-.ata-contador {
-  text-align: center;
-  font-size: 0.75rem;
-  color: #666;
-  font-style: italic;
-  margin: 6px 0 4px;
-  letter-spacing: 0.5px;
-}
-
+.ata-contador { text-align: center; font-size: 0.75rem; color: #666; font-style: italic; margin: 6px 0 4px; letter-spacing: 0.5px; }
 body.escuro .ata-contador { color: #94a3b8; }
-
-.ata-contador.completo {
-  color: #047857;
-  font-weight: 700;
-  font-style: normal;
-}
-
+.ata-contador.completo { color: #047857; font-weight: 700; font-style: normal; }
 body.escuro .ata-contador.completo { color: #34d399; }
 
 .ata-carimbo {
-  margin-top: auto;
-  padding-top: 10px;
-  text-align: center;
-  font-size: 0.7rem;
-  color: #b91c1c;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  border-top: 2px dashed rgba(185, 28, 28, 0.4);
-  transform: rotate(-1deg);
-  opacity: 0.85;
+  margin-top: auto; padding-top: 10px; text-align: center; font-size: 0.7rem; color: #b91c1c; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; border-top: 2px dashed rgba(185, 28, 28, 0.4); transform: rotate(-1deg); opacity: 0.85;
 }
-
-body.escuro .ata-carimbo {
-  color: #f87171;
-  border-top-color: rgba(248, 113, 113, 0.4);
-}
+body.escuro .ata-carimbo { color: #f87171; border-top-color: rgba(248, 113, 113, 0.4); }
 
 /* ===== VERSO DO CARD IMPEDIDOS (CORRIGIDO) ===== */
 .card-impedidos-verso {
   position: relative;
   padding: 0;
-  background: #000;
+  background: var(--bg-card-branco);
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  justify-content: center; /* Centraliza as imagens */
 }
 
-.impedidos-scroll {
+.impedidos-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  /* Esconde a barra de rolagem para ficar limpo */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-}
-
-.impedidos-scroll::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
+  width: 100%;
 }
 
 .img-impedidos {
   width: 100%;
-  height: 100%; /* Cada imagem ocupa 100% da altura da janela */
-  object-fit: cover;
-  flex-shrink: 0;
-  scroll-snap-align: start; /* O ímã de rolagem para cada imagem */
+  flex: 1; /* Faz cada imagem ocupar espaço igual */
+  object-fit: cover; /* Preenche o espaço sem distorcer */
+  display: block;
+  /* Animação inicial: escondida e encolhida */
+  opacity: 0;
+  max-height: 0; 
+  transform: scale(0.95);
+  transition: opacity 0.5s ease, max-height 0.5s ease, transform 0.5s ease;
+}
+
+/* A primeira imagem já nasce visível */
+.img-impedidos:first-child {
+  opacity: 1;
+  max-height: 33.333%; 
+  transform: scale(1);
+}
+
+/* Classe que o JS adiciona para revelar */
+.img-impedidos.revelado {
+  opacity: 1;
+  max-height: 33.333%;
+  transform: scale(1);
 }
 
 .impedidos-contador {
