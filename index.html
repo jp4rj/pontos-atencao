@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <!-- CARD 1: INSTRUÇÕES FINAIS -->
+      <!-- CARD 1: INSTRUÇÕES FINAIS (AGORA COM TEXTO E ILUSTRAÇÃO) -->
       <div class="card tema-azul" data-index="1" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
@@ -56,8 +56,29 @@
             </div>
             <p class="dica">TOQUE PARA VER</p>
           </div>
-          <div class="card-face card-back">
-            <img src="img/urna.jpg" alt="Instruções Finais" class="card-img-full">
+          <div class="card-face card-back card-texto-verso">
+            <div class="texto-box">
+              
+              <!-- Ilustração SVG de equipe reunida -->
+              <div class="icone-texto svg-equipe">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Círculo de fundo -->
+                  <circle cx="50" cy="50" r="45" fill="#e0f2fe" />
+                  <!-- Pessoas -->
+                  <circle cx="30" cy="40" r="8" fill="#3b82f6" />
+                  <path d="M 15 70 Q 30 55 45 70 Z" fill="#3b82f6" />
+                  <circle cx="70" cy="40" r="8" fill="#3b82f6" />
+                  <path d="M 55 70 Q 70 55 85 70 Z" fill="#3b82f6" />
+                  <circle cx="50" cy="30" r="9" fill="#1e3c72" />
+                  <path d="M 30 75 Q 50 55 70 75 Z" fill="#1e3c72" />
+                </svg>
+              </div>
+              
+              <p class="texto-destaque">
+                Assim como você, a convocação dos mesários é tanto para o <strong>1º</strong> quanto para o <strong>2º turno</strong>.<br><br>
+                Sugerimos entrar novamente em contato com sua equipe.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -175,7 +196,7 @@
         </div>
       </div>
 
-      <!-- CARD 7: DTE DECLARAÇÃO -->
+      <!-- CARD 7: DECLARAÇÃO DE TRABALHOS ELEITORAIS -->
       <div class="card tema-cinza" data-index="7" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
@@ -183,9 +204,10 @@
             <h2>DECLARAÇÃO DE<br>TRABALHOS<br>ELEITORAIS</h2>
             <p class="dica">TOQUE PARA VER</p>
           </div>
-          <div class="card-face card-back card-texto-verso">
-            <div class="texto-box texto-esquerda">
-              <ul class="lista-custom">
+          <div class="card-face card-back card-dte-verso">
+            <div class="dte-conteudo">
+              <div class="dte-icone">📄</div>
+              <ul class="dte-lista">
                 <li>Assim como no 1º turno, esta 4ªZE disponibilizará no drive a DTE, por isso a importância de <strong>TODOS</strong> assinarem a ata.</li>
                 <li>Ela ficará disponível também no site do TSE após processamento de entradas/saídas, por isso todos devem registrar sua presença na urna.</li>
               </ul>
