@@ -84,7 +84,7 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  width: 11%;
+  width: 12.5%;
   background: linear-gradient(90deg, #f59e0b, #fbbf24);
   border-radius: 26px;
   transition: width 0.5s ease;
@@ -303,6 +303,74 @@ body.escuro .barra-texto {
   background: #000;
 }
 
+/* ===== VERSO DE TEXTO ===== */
+.card-texto-verso {
+  padding: 24px;
+  background: #f8fafc;
+}
+body.escuro .card-texto-verso { background: #1e293b; }
+
+.texto-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.icone-texto {
+  font-size: 3rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.texto-destaque {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #334155;
+  text-align: center;
+}
+body.escuro .texto-destaque { color: #cbd5e1; }
+
+.texto-destaque strong { color: #1e3c72; }
+body.escuro .texto-destaque strong { color: #60a5fa; }
+
+.texto-esquerda {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 10px;
+}
+
+.lista-custom {
+  list-style: none;
+  width: 100%;
+}
+
+.lista-custom li {
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #334155;
+  padding-left: 20px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+body.escuro .lista-custom li { color: #cbd5e1; }
+
+.lista-custom li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #f59e0b;
+  font-weight: bold;
+  font-size: 1.2rem;
+  top: -2px;
+}
+
+.lista-custom li strong { color: #1e3c72; }
+body.escuro .lista-custom li strong { color: #60a5fa; }
+
 /* ===== VERSO DO CARD DE INTRODUÇÃO ===== */
 .card-intro-verso {
   background: linear-gradient(135deg, #fff7ed, #fef3c7);
@@ -396,6 +464,72 @@ body.escuro .ata-contador.completo { color: #34d399; }
   margin-top: auto; padding-top: 10px; text-align: center; font-size: 0.7rem; color: #b91c1c; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; border-top: 2px dashed rgba(185, 28, 28, 0.4); transform: rotate(-1deg); opacity: 0.85;
 }
 body.escuro .ata-carimbo { color: #f87171; border-top-color: rgba(248, 113, 113, 0.4); }
+
+/* ===== NOVO VERSO: DECLARAÇÃO DE TRABALHOS ELEITORAIS ===== */
+.card-dte-verso {
+  background: #ffffff !important;
+  padding: 24px;
+}
+body.escuro .card-dte-verso {
+  background: #1e293b !important;
+}
+
+.dte-conteudo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.dte-icone {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.dte-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.dte-lista li {
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #1e293b; /* Texto escuro para fundo branco */
+  padding-left: 22px;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+body.escuro .dte-lista li {
+  color: #cbd5e1; /* Texto claro para fundo escuro */
+}
+
+.dte-lista li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #1e3c72;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+body.escuro .dte-lista li::before {
+  color: #60a5fa;
+}
+
+.dte-lista li strong {
+  color: #1e3c72;
+}
+
+body.escuro .dte-lista li strong {
+  color: #60a5fa;
+}
 
 /* ===== BARRA DE NAVEGAÇÃO ===== */
 .barra-nav {
@@ -525,6 +659,7 @@ body.escuro .dot.visitado { background: #34d399; }
   .icone-calendario { width: 100px; height: 100px; }
   .intro-conteudo p { font-size: 1.15rem; }
   .subtitulo-card { font-size: 1rem; padding: 16px; }
+  .dte-lista li { font-size: 1.1rem; }
   .ata-titulo { font-size: 1.25rem; }
   .ata-item { font-size: 1.05rem; }
   .ata-extra { font-size: 1.05rem; }
