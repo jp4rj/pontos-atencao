@@ -333,36 +333,26 @@ function configurarAtaTap() {
   });
 }
 
-// ===== CARD IMPEDIDOS — revelação progressiva (SCROLL) =====
+// ===== CARD IMPEDIDOS — revelação progressiva =====
 function resetarImpedidos() {
   impedidosRevelados = 1;
-  const container = document.getElementById('impedidosContainer');
-  if (container) {
-    // Reseta para a primeira imagem (topo)
-    container.scrollTo({ top: 0, behavior: 'auto' });
-  }
+  document.querySelectorAll('.img-impedidos').forEach((img, i) => {
+    if (i > 0) img.classList.remove('revelado');
+  });
   atualizarContadorImpedidos();
   atualizarBotoes();
 }
 
 function revelarProximaImagemImpedidos() {
   if (impedidosRevelados < impedidosTotal) {
-    impedidosRevelados++;
-    
-    const container = document.getElementById('impedidosContainer');
-    if (container) {
-      // Calcula a altura de uma imagem (a altura total dividida por 3)
-      const alturaImagem = container.clientHeight;
-      
-      // Desliza o container para baixo
-      container.scrollTo({
-        top: alturaImagem * (impedidosRevelados - 1),
-        behavior: 'smooth'
-      });
+    const imgs = document.querySelectorAll('.img-impedidos');
+    const img = imgs[impedidosRevelados]; 
+    if (img) {
+      img.classList.add('revelado');
+      impedidosRevelados++;
+      atualizarContadorImpedidos();
+      atualizarBotoes();
     }
-    
-    atualizarContadorImpedidos();
-    atualizarBotoes();
   }
 }
 
@@ -376,7 +366,6 @@ function atualizarContadorImpedidos() {
   } else {
     contador.textContent = `✓ Completo · ${impedidosRevelados}/${impedidosTotal}`;
     contador.classList.add('completo');
-    // Esconde o contador após completar, para não cobrir a última imagem
     setTimeout(() => {
       contador.style.opacity = '0';
     }, 2000);
