@@ -1,5 +1,5 @@
 // ===== CONFIGURAÇÕES =====
-const WHATSAPP_NUMERO = "5521968654940";
+const WHATSAPP_NUMERO = "5521986233071";
 const CODIGOS = [
   "URNA", "DEMOCRACIA", "CIDADANIA", "VOTO", "MESARIO", "ELEICAO", "ZERESIMA", "BOLETIM", "SECAO", "SEGUNDO-TURNO"
 ];
@@ -18,7 +18,7 @@ const somFlip = document.getElementById('somFlip');
 // ===== ESTADO DO CARD ATA =====
 let ataRevelados = 0;
 const ataTotalItens = 5;
-const indiceCardAta = 3; 
+const indiceCardAta = 3; // O card da ATA é o índice 3 (4º card)
 
 // ===== SONS =====
 function tocarSomCarta() {
