@@ -20,7 +20,7 @@
   <div class="carrossel">
     <div class="cards-viewport" id="viewport">
 
-      <!-- CARD 0: INTRODUÇÃO -->
+      <!-- CARD 1 (index 0): PONTOS DE ATENÇÃO -->
       <div class="card tema-intro" data-index="0" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
@@ -40,14 +40,14 @@
         </div>
       </div>
 
-      <!-- CARD 1: INSTRUÇÕES FINAIS -->
+      <!-- CARD 2 (index 1): INSTRUÇÕES INICIAIS -->
       <div class="card tema-azul" data-index="1" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
             <div class="icone-card">📝</div>
-            <h2>INSTRUÇÕES<br>FINAIS</h2>
+            <h2>INSTRUÇÕES<br>INICIAIS</h2>
             <div class="subtitulo-card subtitulo-maior">
-              <p>As instruções finais do <strong>1º turno</strong> são aplicáveis ao <strong>2º turno</strong>.</p>
+              <p>As instruções do <strong>1º turno</strong> são aplicáveis ao <strong>2º turno</strong>.</p>
             </div>
             <p class="dica">TOQUE PARA VER</p>
           </div>
@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <!-- CARD 2: CABINA DE VOTAÇÃO -->
+      <!-- CARD 3 (index 2): CABINA DE VOTAÇÃO -->
       <div class="card tema-azul" data-index="2" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
@@ -90,7 +90,7 @@
         </div>
       </div>
 
-      <!-- CARD 3: ATA DE SEÇÃO -->
+      <!-- CARD 4 (index 3): ATA DE SEÇÃO -->
       <div class="card tema-roxo" data-index="3" id="cardAta">
         <div class="card-inner">
           <div class="card-face card-front" onclick="virarCard(this.parentElement.parentElement)">
@@ -119,7 +119,7 @@
         </div>
       </div>
 
-      <!-- CARD 4: IMPEDIDOS DE VOTAR -->
+      <!-- CARD 5 (index 4): IMPEDIDOS DE VOTAR -->
       <div class="card tema-vermelho" data-index="4" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
@@ -136,7 +136,7 @@
         </div>
       </div>
 
-      <!-- CARD 5: ATIVIDADES DO SÁBADO -->
+      <!-- CARD 6 (index 5): ATIVIDADES DO SÁBADO -->
       <div class="card tema-laranja" data-index="5" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
@@ -165,30 +165,8 @@
         </div>
       </div>
 
-      <!-- CARD 6: ENCERRAMENTO DA VOTAÇÃO -->
-      <div class="card tema-verde" data-index="6" onclick="virarCard(this)">
-        <div class="card-inner">
-          <div class="card-face card-front">
-            <div class="icone-card">🔒</div>
-            <h2>ENCERRAMENTO<br>DA VOTAÇÃO</h2>
-            <div class="subtitulo-card subtitulo-maior">
-              <ul class="lista-front">
-                <li>No momento indicado pela urna retirar a <strong>mídia de resultado</strong>.</li>
-                <li>Deslacrar <strong>SOMENTE</strong> o compartimento da mídia de resultado.</li>
-                <li>Relacrar com o <strong>lacre azul</strong> que no sábado você guardou na pasta azul.</li>
-              </ul>
-            </div>
-            <p class="dica">TOQUE PARA VER</p>
-          </div>
-          <div class="card-face card-back">
-            <!-- Alterado para domingo-fim.jpg -->
-            <img src="img/domingo-fim.jpg" alt="Encerramento da Votação" class="card-img-full">
-          </div>
-        </div>
-      </div>
-
-      <!-- CARD 7: FLUXO DE VOTAÇÃO (NOVO) -->
-      <div class="card tema-azul" data-index="7" onclick="virarCard(this)">
+      <!-- CARD 7 (index 6): FLUXO DE VOTAÇÃO -->
+      <div class="card tema-azul" data-index="6" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
             <div class="icone-card">👥</div>
@@ -207,7 +185,28 @@
         </div>
       </div>
 
-      <!-- CARD 8: DECLARAÇÃO DE TRABALHOS ELEITORAIS -->
+      <!-- CARD 8 (index 7): ENCERRAMENTO DA VOTAÇÃO -->
+      <div class="card tema-verde" data-index="7" onclick="virarCard(this)">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="icone-card">🔒</div>
+            <h2>ENCERRAMENTO<br>DA VOTAÇÃO</h2>
+            <div class="subtitulo-card subtitulo-maior">
+              <ul class="lista-front">
+                <li>No momento indicado pela urna retirar a <strong>mídia de resultado</strong>.</li>
+                <li>Deslacrar <strong>SOMENTE</strong> o compartimento da mídia de resultado.</li>
+                <li>Relacrar com o <strong>lacre azul</strong> que no sábado você guardou na pasta azul.</li>
+              </ul>
+            </div>
+            <p class="dica">TOQUE PARA VER</p>
+          </div>
+          <div class="card-face card-back">
+            <img src="img/domingo-fim.jpg" alt="Encerramento da Votação" class="card-img-full">
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 9 (index 8): DECLARAÇÃO DE TRABALHOS ELEITORAIS -->
       <div class="card tema-cinza" data-index="8" onclick="virarCard(this)">
         <div class="card-inner">
           <div class="card-face card-front">
@@ -219,7 +218,7 @@
             <div class="dte-conteudo">
               <div class="dte-icone">📄</div>
               <ul class="dte-lista">
-                <li>Assim como no 1º turno, esta 4ªZE disponibilizará no drive a DTE, por isso a importância de <strong>TODOS</strong> assinarem a ata.</li>
+                <li>Assim como no 1º turno, esta 4ªZE disponibilizará no drive a DTE, <strong>até terça-feira</strong>, por isso a importância de <strong>TODOS</strong> assinarem a ata.</li>
                 <li>Ela ficará disponível também no site do TSE após processamento de entradas/saídas, por isso todos devem registrar sua presença na urna.</li>
               </ul>
             </div>
