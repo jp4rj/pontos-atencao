@@ -1,4 +1,5 @@
 // ===== CONFIGURAÇÕES =====
+// ATENÇÃO: Número alterado para 5521968654940
 const WHATSAPP_NUMERO = "5521968654940";
 const CODIGOS = [
   "URNA", "DEMOCRACIA", "CIDADANIA", "VOTO", "MESARIO", "ELEICAO", "ZERESIMA", "BOLETIM", "SECAO", "SEGUNDO-TURNO"
@@ -94,7 +95,6 @@ function proximoCard() {
 
   const cardAtual = todosCards[indiceAtual];
   
-  // Regra geral para todos os cards
   if (!cardAtual.classList.contains('flipped')) return;
 
   if (indiceAtual === totalCards - 1) { mostrarCardFinal(); return; }
