@@ -17,17 +17,6 @@
   --sombra-suave: rgba(0, 0, 0, 0.08);
 }
 
-body.escuro {
-  --bg-pagina: #0f172a;
-  --bg-card-branco: #1e293b;
-  --texto-principal: #e2e8f0;
-  --texto-secundario: #94a3b8;
-  --barra-fundo: #334155;
-  --barra-texto: #e2e8f0;
-  --sombra-card: rgba(0, 0, 0, 0.6);
-  --sombra-suave: rgba(0, 0, 0, 0.3);
-}
-
 body {
   background: var(--bg-pagina);
   height: 100vh;
@@ -37,32 +26,7 @@ body {
   align-items: center;
   overflow: hidden;
   padding: 10px;
-  transition: background 0.3s ease;
 }
-
-/* ===== BOTÃO MODO ESCURO ===== */
-.btn-modo {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: none;
-  background: var(--bg-card-branco);
-  font-size: 1.4rem;
-  cursor: pointer;
-  box-shadow: 0 4px 14px var(--sombra-suave);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  transition: all 0.3s ease;
-  line-height: 1;
-}
-
-.btn-modo:hover { transform: scale(1.1) rotate(15deg); }
-.btn-modo:active { transform: scale(0.95); }
 
 /* ===== BARRA DE PROGRESSO COM TÍTULO ===== */
 .barra-titulo {
@@ -76,7 +40,6 @@ body {
   flex-shrink: 0;
   margin-bottom: 12px;
   box-shadow: 0 4px 14px var(--sombra-suave);
-  transition: background 0.3s ease;
 }
 
 .barra-preenchimento {
@@ -84,7 +47,7 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  width: 12.5%;
+  width: 11%;
   background: linear-gradient(90deg, #f59e0b, #fbbf24);
   border-radius: 26px;
   transition: width 0.5s ease;
@@ -102,11 +65,6 @@ body {
   font-weight: 800;
   letter-spacing: 1.2px;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8), 0 0 8px rgba(255, 255, 255, 0.6);
-  transition: color 0.3s ease;
-}
-
-body.escuro .barra-texto {
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 /* ===== CARROSSEL ===== */
@@ -221,6 +179,12 @@ body.escuro .barra-texto {
   text-align: left;
 }
 
+/* Classe para aumentar a fonte do subtítulo em cards específicos */
+.subtitulo-maior {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
 .subtitulo-card p {
   margin-bottom: 0;
 }
@@ -285,7 +249,6 @@ body.escuro .barra-texto {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s ease;
 }
 
 .card-img-full {
@@ -308,7 +271,6 @@ body.escuro .barra-texto {
   padding: 24px;
   background: #f8fafc;
 }
-body.escuro .card-texto-verso { background: #1e293b; }
 
 .texto-box {
   width: 100%;
@@ -331,9 +293,6 @@ body.escuro .card-texto-verso { background: #1e293b; }
   height: 100px;
   display: block;
 }
-body.escuro .svg-equipe svg circle:first-child {
-  fill: #334155; /* Muda o fundo do círculo no modo escuro */
-}
 
 .texto-destaque {
   font-size: 1.1rem;
@@ -341,10 +300,8 @@ body.escuro .svg-equipe svg circle:first-child {
   color: #334155;
   text-align: center;
 }
-body.escuro .texto-destaque { color: #cbd5e1; }
 
 .texto-destaque strong { color: #1e3c72; }
-body.escuro .texto-destaque strong { color: #60a5fa; }
 
 .texto-esquerda {
   align-items: flex-start;
@@ -366,7 +323,6 @@ body.escuro .texto-destaque strong { color: #60a5fa; }
   margin-bottom: 16px;
   text-align: left;
 }
-body.escuro .lista-custom li { color: #cbd5e1; }
 
 .lista-custom li::before {
   content: "•";
@@ -379,17 +335,14 @@ body.escuro .lista-custom li { color: #cbd5e1; }
 }
 
 .lista-custom li strong { color: #1e3c72; }
-body.escuro .lista-custom li strong { color: #60a5fa; }
 
 /* ===== VERSO DO CARD DE INTRODUÇÃO ===== */
 .card-intro-verso {
   background: linear-gradient(135deg, #fff7ed, #fef3c7);
   padding: 32px 26px;
 }
-body.escuro .card-intro-verso { background: linear-gradient(135deg, #3f2a1a, #4a3820); }
 
 .intro-conteudo { text-align: center; color: #1e3c72; }
-body.escuro .intro-conteudo { color: #e2e8f0; }
 .intro-emoji { font-size: 3.2rem; margin-bottom: 16px; }
 
 .intro-conteudo h3 {
@@ -398,11 +351,9 @@ body.escuro .intro-conteudo { color: #e2e8f0; }
   margin-bottom: 20px;
   color: #b91c1c;
 }
-body.escuro .intro-conteudo h3 { color: #f87171; }
+
 .intro-conteudo p { font-size: 1.05rem; line-height: 1.6; margin-bottom: 16px; color: #333; }
-body.escuro .intro-conteudo p { color: #cbd5e1; }
 .intro-conteudo strong { color: #b91c1c; }
-body.escuro .intro-conteudo strong { color: #f87171; }
 
 .intro-destinatario {
   background: rgba(185, 28, 28, 0.08);
@@ -411,25 +362,16 @@ body.escuro .intro-conteudo strong { color: #f87171; }
   border-radius: 8px;
   margin: 18px 0 !important;
 }
-body.escuro .intro-destinatario {
-  background: rgba(248, 113, 113, 0.12);
-  border-left-color: #f87171;
-}
 
 .intro-dica { margin-top: 20px; font-style: italic; color: #666 !important; font-size: 0.95rem !important; }
-body.escuro .intro-dica { color: #94a3b8 !important; }
 
 /* ===== VERSO DO CARD ATA DE SEÇÃO ===== */
 .card-ata-verso { background: #f5f1e8; padding: 0; cursor: pointer; }
-body.escuro .card-ata-verso { background: #2a2419; }
 
 .ata-papel {
   position: relative; width: 100%; height: 100%;
   background: repeating-linear-gradient(to bottom, transparent 0px, transparent 27px, #d4c9b0 28px, transparent 29px), linear-gradient(135deg, #fefcf5, #f5ecd7);
   overflow: hidden;
-}
-body.escuro .ata-papel {
-  background: repeating-linear-gradient(to bottom, transparent 0px, transparent 27px, #5a4a30 28px, transparent 29px), linear-gradient(135deg, #2a2419, #3a3020);
 }
 
 .ata-margem { position: absolute; top: 0; left: 28px; width: 2px; height: 100%; background: #dc2626; opacity: 0.5; z-index: 1; }
@@ -440,10 +382,8 @@ body.escuro .ata-papel {
 }
 
 .ata-titulo { font-size: 1.1rem; color: #1e293b; margin-bottom: 14px; line-height: 1.3; text-align: center; font-weight: normal; }
-body.escuro .ata-titulo { color: #e2e8f0; }
 
 .ata-destaque { color: #b91c1c; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px; }
-body.escuro .ata-destaque { color: #f87171; }
 
 .ata-lista { list-style: none; padding: 0; margin: 0 0 12px 0; }
 
@@ -452,36 +392,29 @@ body.escuro .ata-destaque { color: #f87171; }
   opacity: 0; transform: translateX(-15px); max-height: 0; overflow: hidden;
   transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease, padding 0.3s ease;
 }
-body.escuro .ata-item { color: #e2e8f0; }
+
 .ata-item.revelado { opacity: 1; transform: translateX(0); max-height: 100px; }
 .check { position: absolute; left: 0; top: 5px; color: #047857; font-weight: 900; font-style: normal; font-size: 1.05rem; }
-body.escuro .check { color: #34d399; }
 
 .ata-extra {
   font-size: 0.92rem; line-height: 1.45; color: #1e3a8a; font-weight: 600; text-align: center; margin-top: 8px; padding: 8px 6px; background: rgba(30, 58, 138, 0.06); border-radius: 8px;
   opacity: 0; transform: translateY(10px); max-height: 0; overflow: hidden; transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease, padding 0.3s ease;
 }
-body.escuro .ata-extra { color: #93c5fd; background: rgba(147, 197, 253, 0.08); }
+
 .ata-extra.revelado { opacity: 1; transform: translateY(0); max-height: 120px; }
 .emoji-extra { font-size: 1.15rem; margin-right: 4px; }
 
 .ata-contador { text-align: center; font-size: 0.75rem; color: #666; font-style: italic; margin: 6px 0 4px; letter-spacing: 0.5px; }
-body.escuro .ata-contador { color: #94a3b8; }
 .ata-contador.completo { color: #047857; font-weight: 700; font-style: normal; }
-body.escuro .ata-contador.completo { color: #34d399; }
 
 .ata-carimbo {
   margin-top: auto; padding-top: 10px; text-align: center; font-size: 0.7rem; color: #b91c1c; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; border-top: 2px dashed rgba(185, 28, 28, 0.4); transform: rotate(-1deg); opacity: 0.85;
 }
-body.escuro .ata-carimbo { color: #f87171; border-top-color: rgba(248, 113, 113, 0.4); }
 
 /* ===== NOVO VERSO: DECLARAÇÃO DE TRABALHOS ELEITORAIS ===== */
 .card-dte-verso {
   background: #ffffff !important;
   padding: 24px;
-}
-body.escuro .card-dte-verso {
-  background: #1e293b !important;
 }
 
 .dte-conteudo {
@@ -509,14 +442,10 @@ body.escuro .card-dte-verso {
   position: relative;
   font-size: 0.95rem;
   line-height: 1.5;
-  color: #1e293b; /* Texto escuro para fundo branco */
+  color: #1e293b;
   padding-left: 22px;
   margin-bottom: 18px;
   text-align: left;
-}
-
-body.escuro .dte-lista li {
-  color: #cbd5e1; /* Texto claro para fundo escuro */
 }
 
 .dte-lista li::before {
@@ -529,16 +458,8 @@ body.escuro .dte-lista li {
   font-size: 1.2rem;
 }
 
-body.escuro .dte-lista li::before {
-  color: #60a5fa;
-}
-
 .dte-lista li strong {
   color: #1e3c72;
-}
-
-body.escuro .dte-lista li strong {
-  color: #60a5fa;
 }
 
 /* ===== BARRA DE NAVEGAÇÃO ===== */
@@ -574,7 +495,6 @@ body.escuro .dte-lista li strong {
 .nav-btn:hover:not(:disabled) { background: linear-gradient(135deg, #f97316, #ea580c); transform: scale(1.08); }
 .nav-btn:active:not(:disabled) { transform: scale(0.92); background: linear-gradient(135deg, #ea580c, #c2410c); }
 .nav-btn:disabled { background: #cbd5e1; color: #fff; opacity: 0.5; cursor: not-allowed; box-shadow: none; transform: none; }
-body.escuro .nav-btn:disabled { background: #475569; }
 
 /* ===== PROGRESSO (X de Y) ===== */
 .progresso {
@@ -588,7 +508,6 @@ body.escuro .nav-btn:disabled { background: #475569; }
   min-width: 100px;
   text-align: center;
   letter-spacing: 0.5px;
-  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* ===== INDICADOR (PONTINHOS) ===== */
@@ -612,11 +531,9 @@ body.escuro .nav-btn:disabled { background: #475569; }
   border: none;
   padding: 0;
 }
-body.escuro .dot { background: #475569; }
+
 .dot.ativo { background: #1e3c72; width: 24px; border-radius: 5px; animation: pulsarDot 1.5s ease-in-out infinite; }
-body.escuro .dot.ativo { background: #60a5fa; }
 .dot.visitado { background: #11998e; }
-body.escuro .dot.visitado { background: #34d399; }
 
 @keyframes pulsarDot {
   0%, 100% { box-shadow: 0 0 0 0 rgba(30, 60, 114, 0.5); }
@@ -660,7 +577,6 @@ body.escuro .dot.visitado { background: #34d399; }
 
 /* ===== DESKTOP ===== */
 @media (min-width: 700px) {
-  .btn-modo { width: 50px; height: 50px; font-size: 1.6rem; top: 16px; right: 16px; }
   .barra-titulo { height: 60px; margin-bottom: 16px; }
   .barra-texto { font-size: 1.2rem; letter-spacing: 1.5px; }
   .card { max-width: 460px; }
@@ -668,7 +584,8 @@ body.escuro .dot.visitado { background: #34d399; }
   .icone-card { font-size: 3.2rem; }
   .icone-calendario { width: 100px; height: 100px; }
   .intro-conteudo p { font-size: 1.15rem; }
-  .subtitulo-card { font-size: 1rem; padding: 16px; }
+  .subtitulo-card { padding: 16px; }
+  .subtitulo-maior { font-size: 1.15rem; }
   .dte-lista li { font-size: 1.1rem; }
   .svg-equipe svg { width: 120px; height: 120px; }
   .ata-titulo { font-size: 1.25rem; }
