@@ -20,28 +20,6 @@ let ataRevelados = 0;
 const ataTotalItens = 5;
 const indiceCardAta = 3; 
 
-// ===== MODO ESCURO =====
-function initModo() {
-  const modoSalvo = localStorage.getItem('modo');
-  if (modoSalvo === 'escuro') {
-    document.body.classList.add('escuro');
-    document.getElementById('iconeModo').textContent = '☀️';
-  }
-}
-
-function alternarModo() {
-  const body = document.body;
-  const icone = document.getElementById('iconeModo');
-  body.classList.toggle('escuro');
-  if (body.classList.contains('escuro')) {
-    localStorage.setItem('modo', 'escuro');
-    icone.textContent = '☀️';
-  } else {
-    localStorage.setItem('modo', 'claro');
-    icone.textContent = '🌙';
-  }
-}
-
 // ===== SONS =====
 function tocarSomCarta() {
   if (somFlip) {
@@ -65,7 +43,6 @@ function enviarWhatsapp() {
 
 // ===== INICIALIZAÇÃO =====
 function init() {
-  initModo();
   criarIndicador();
   mostrarCard(0);
   configurarTeclado();
