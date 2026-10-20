@@ -15,11 +15,6 @@ let timerCardFinal = null;
 let codigoAtual = "";
 const somFlip = document.getElementById('somFlip');
 
-// ===== ESTADO DO CARD ATA =====
-let ataRevelados = 0;
-const ataTotalItens = 5;
-const indiceCardAta = 3; // O card da ATA é o índice 3 (4º card)
-
 // ===== SONS =====
 function tocarSomCarta() {
   if (somFlip) {
@@ -47,7 +42,6 @@ function init() {
   mostrarCard(0);
   configurarTeclado();
   atualizarProgresso();
-  resetarAta();
 }
 
 // ===== MOSTRAR CARD =====
@@ -100,11 +94,8 @@ function proximoCard() {
 
   const cardAtual = todosCards[indiceAtual];
   
-  if (indiceAtual === indiceCardAta) {
-    if (ataRevelados < ataTotalItens) return; 
-  } else {
-    if (!cardAtual.classList.contains('flipped')) return;
-  }
+  // Regra geral para todos os cards
+  if (!cardAtual.classList.contains('flipped')) return;
 
   if (indiceAtual === totalCards - 1) { mostrarCardFinal(); return; }
   if (indiceAtual < totalCards - 1) { mostrarCard(indiceAtual + 1); }
@@ -145,16 +136,9 @@ function mostrarCardFinal() {
 function atualizarBotoes() {
   const cardAtual = todosCards[indiceAtual];
   const foiVirado = cardAtual.classList.contains('flipped');
-  
-  let podeAvancar = false;
-  if (indiceAtual === indiceCardAta) {
-    podeAvancar = (ataRevelados >= ataTotalItens);
-  } else {
-    podeAvancar = foiVirado;
-  }
 
   document.getElementById('btnPrev').disabled = indiceAtual === 0;
-  document.getElementById('btnNext').disabled = !podeAvancar;
+  document.getElementById('btnNext').disabled = !foiVirado;
 }
 
 // ===== PROGRESSO (X de Y) =====
@@ -198,65 +182,6 @@ function atualizarIndicador() {
   });
 }
 
-// ===== CARD ATA — revelação progressiva =====
-function resetarAta() {
-  ataRevelados = 0;
-  document.querySelectorAll('.ata-item').forEach(item => { item.classList.remove('revelado'); });
-  const extra = document.getElementById('ataExtra');
-  if (extra) extra.classList.remove('revelado');
-  atualizarContadorAta();
-  atualizarBotoes();
-}
-
-function revelarProximoItemAta() {
-  if (ataRevelados < ataTotalItens) {
-    const item = document.querySelector(`.ata-item[data-item="${ataRevelados}"]`);
-    if (item) {
-      item.classList.add('revelado');
-      ataRevelados++;
-      atualizarContadorAta();
-      atualizarBotoes();
-    }
-  } else {
-    const extra = document.getElementById('ataExtra');
-    if (extra && !extra.classList.contains('revelado')) {
-      extra.classList.add('revelado');
-      atualizarContadorAta();
-    }
-  }
-}
-
-function atualizarContadorAta() {
-  const contador = document.getElementById('ataContador');
-  if (!contador) return;
-  const extra = document.getElementById('ataExtra');
-  const extraRevelado = extra && extra.classList.contains('revelado');
-
-  if (ataRevelados < ataTotalItens) {
-    contador.textContent = `Toque para revelar · ${ataRevelados}/${ataTotalItens}`;
-    contador.classList.remove('completo');
-  } else if (!extraRevelado) {
-    contador.textContent = `Toque para finalizar · ${ataRevelados}/${ataTotalItens}`;
-    contador.classList.remove('completo');
-  } else {
-    contador.textContent = `✓ Completo · ${ataRevelados}/${ataTotalItens}`;
-    contador.classList.add('completo');
-  }
-}
-
-function configurarAtaTap() {
-  const cardAta = document.getElementById('cardAta');
-  if (!cardAta) return;
-
-  const verso = cardAta.querySelector('.card-ata-verso');
-  verso.addEventListener('click', (e) => {
-    if (!cardAta.classList.contains('ativo')) return;
-    if (!cardAta.classList.contains('flipped')) return;
-    e.stopPropagation();
-    revelarProximoItemAta();
-  });
-}
-
 // ===== TECLADO =====
 function configurarTeclado() {
   document.addEventListener('keydown', (e) => {
@@ -291,12 +216,10 @@ function voltarAoInicio() {
   visitados.clear();
   finalMostrado = false;
   cardFinal.classList.remove('ativo');
-  resetarAta();
   mostrarCard(0);
 }
 
 // ===== START =====
 document.addEventListener('DOMContentLoaded', () => {
   init();
-  configurarAtaTap();
 });
